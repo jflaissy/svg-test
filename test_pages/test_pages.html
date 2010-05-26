@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:svg="http://www.w3.org/2000/svg">
+	<head>
+		<title>Première page de test pour le SVG</title> 
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="description" content="page perso">
+		<meta name="auteur" content="moi">
+		<meta name="keywords" content="enst paris">
+		
+        <link 	title="ma feuille de style perso" type="text/css" rel="stylesheet" href="styles/styleperso.css" />
+		<script language= "Javascript" type="text/JavaScript" src="test.js">
+		</script>
+	</head>
+
+	<body>
+		<h1 onclick="initialize();">
+				Ceci est une page de test pour le projet SVG
+		</h1>
+		<!-- <h1 onclick="">  with="100px" height="100px" -->
+		<div class='cadre'>
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="300">
+			   <!-- un petit rectangle avec des coins arroundis  -->
+			   <rect x="50" y="50" rx="5" ry="5" width="300" height="100"
+			         style="fill:#CCCCFF;stroke:#000099"/>
+			   <text x="55" y="90" style="stroke:#000099;fill:#000099;font-size:24;">
+			    HELLO cher visiteur </text>
+	  		</svg>
+		</div>
+		
+		<div class='cadre' >
+			<embed class='svg_image' src="svgfile/wikipedia_test.svg" type="image/svg+xml" />
+		</div>
+
+    </body>
+    
+</html>
