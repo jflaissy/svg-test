@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:svg="http://www.w3.org/2000/svg">
+	<head>
+		<title>Première page de test pour le SVG</title> 
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="description" content="page perso">
+		<meta name="auteur" content="moi">
+		<meta name="keywords" content="enst paris">
+		
+        <link 	title="ma feuille de style perso" type="text/css" rel="stylesheet" href="../styles/styleperso.css" />
+		<script language= "Javascript" type="text/JavaScript" src="../javascript/dimension_window.js">
+		</script>
+	</head>
+
+	<body onload="initialize();">
+		<h1 onclick="initialize();">
+				Ceci est la seconde page de test de la série 1 pour le projet SVG
+		</h1>
+		<!-- <h1 onclick="">  with="100px" height="100px" -->
+
+		
+	<!-- 	<div class='cadre' > -->
+			<embed class='svg_image' src="../svgfile/wikipedia_test.svg" type="image/svg+xml" />
+	<!-- 	</div> -->
+		<script language="javascript" type="text/javascript">
+			<!-- Ici on redirige vers le test suivant -->
+			setTimeout("window.location.replace('serie1-1.html');",2000);
+		</script>
+
+    </body>
+    
+</html>
