@@ -12,29 +12,19 @@ font-family : Georgia, "Times New Roman", Times, serif;
 font-size : 0.9em;
 height : 100%;
 width : 100%;
-//background-image : url("images/Photoid.jpg");
-//background-repeat : repeat-x;
 background-position : top;
-//background-color : #f0ecd6;
+background-color:#dd0000;
 }
-.cadre{
-		//background-color: #ee1100;
-		width:800px;
-		hight:600px;
-		//border-style: solid 
-		//border-color: #ee1100;
-		//border-width: 20px;
-		//border:20px solid #ee1100;
-		margin:50px solid #ccff33;
-		
+
+div{
+	background-color: white;
+	//border: 1px solid green;
+	position: absolute;
+	left: 100px;
+	top: 300px;
 	}
+
+
 .svg_image{
-		//left:100px;
-		//width:500px;
-		//hight:350px;
-		//border-style: solid 
-		//border-color: #ccff33;
-		//border-width: 20px;
-		//margin:10px solid #55ffff;
-		border:20px solid #ee1100;
+		//border:20px solid #ee1100;
 	}
