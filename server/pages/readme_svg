@@ -1,0 +1,7 @@
+Pour faire du SVG dans une page Html:
+
+balise :
+
+<embed src='file.svg' type="image/svg+xml" width='180' height='250' />
+
+<!-- Si on veut ajouter un plugin car le navigeteur n'en propose pas on peut ajouter un champ pluginspage='….' -->

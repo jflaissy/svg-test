@@ -1,0 +1,21 @@
+html {
+margin : 0;
+padding : 0;
+height : 100%;
+width : 100%;
+}
+
+body {
+margin : 0;
+padding : 0;
+font-family : Georgia, "Times New Roman", Times, serif;
+font-size : 0.9em;
+height : 100%;
+width : 100%;
+background-position : top;
+background-color:#bbff55;
+
+}
+
+
+
