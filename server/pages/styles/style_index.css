@@ -13,18 +13,9 @@ font-size : 0.9em;
 height : 100%;
 width : 100%;
 background-position : top;
-background-color:#dd0000;
+background-color:#bbff55;
+
 }
 
-div{
-	background-color: white;
-	//border: 1px solid green;
-	position: absolute;
-	left: 100px;
-	top: 300px;
-	}
 
 
-.svg_image{
-		//border:20px solid #ee1100;
-	}

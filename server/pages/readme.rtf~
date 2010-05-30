@@ -12,7 +12,4 @@
 -un fichier liste.html qui est un lien vers le premier test de la premi\'e8re s\'e9rie,\
 -un fichier s\'e9rie1-1.html  o\'f9 on appelle le dessin le script qui d\'e9finit la taille du navigateur , puis le  svg , et puis un timeout pour aller vers la page s\'e9rie1-2.html\
 -dans cette derni\'e8re c'est le m\'eame dessin (je ne me suis pas compliqu\'e9 la t\'e2che) et on  rappel la page 1 pour le moment. Mais \'e0 terme je pense que ce sera une fonction  avec un ou deux param\'e8tres cous s\'e9rie et num\'e9ro.\
--Par contre je n'arrive pas \'e0 r\'e9gler la taille du svg \'e0 part en zoomant (je vais regarder \'e7a plus tard)} -> j'ai regardé ça et c'est assez bizarre parce que il faut jouer sur le fichier SVG lui meme
--J'ai mis un fond rouge et l'image au centre (théoriquement)
--J'ai fais un readme pour le svg
-
+-Par contre je n'arrive pas \'e0 r\'e9gler la taille du svg \'e0 part en zoomant (je vais regarder \'e7a plus tard)}

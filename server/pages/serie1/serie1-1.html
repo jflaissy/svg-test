@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//FR"
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
-<html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:svg="http://www.w3.org/2000/svg">
+<html xmlns="http://www.w3.org/1999/xhtml"  >
 	<head>
-		<title>Première page de test pour le SVG</title> 
+		<title>index des tests automatique SVG</title> 
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<meta name="description" content="page perso">
 		<meta name="auteur" content="moi">
@@ -16,18 +15,20 @@
 	</head>
 
 	<body onload="initialize();">
-		<h1 onclick="initialize();">
-				Ceci est la première page de test de la série 1		</h1>
-		<!-- <h1 onclick="">  with="100px" height="100px" -->
-
-		
-	<!-- 	<div class='cadre' > -->
+		<!-- On ne mets rien d'autre que l'image sur la page afin de ne pas avoir d'éléments parasites 
+		pour l'analyse d'image	
+		 -->
+		<div id='cadre' >
 			<embed class='svg_image' src="../svgfile/wikipedia_test.svg" type="image/svg+xml" />
-	<!-- 	</div> -->
+	
 		<script language="javascript" type="text/javascript">
+			/*On initialise la taille de la fenêtre et la position de l'image SVG 
+				Je le mets à la fin de manière à avoir touts les éléments de la page
+				Chargés afin de pouvoir accéder à leur Style.
+			*/
+				initialize();
 			<!-- Ici on redirige vers le test suivant -->
-			//window.location.replace("http://www.google.fr");
-			setTimeout("window.location.replace('serie1-2.html');",2000);
+			setTimeout("window.location.replace('serie1-2.html');",5000);
 		</script>
 
     </body>
