@@ -1,0 +1,11 @@
+'''
+Created on 8 juin 2010
+
+@author: pierrebesson
+'''
+tests=[]
+
+test_courant = ["type":"les uns contre les autres",
+                "execs": [exec1,exec2,exec3],
+                
+                ]

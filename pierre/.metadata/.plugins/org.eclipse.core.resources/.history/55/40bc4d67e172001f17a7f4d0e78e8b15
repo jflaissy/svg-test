@@ -1,0 +1,27 @@
+'''
+Created on 8 juin 2010
+
+@author: pierrebesson
+'''
+tests=[]
+#ici c'est un tableau associatif
+test_courant = {
+                "type":"les uns contre les autres",
+                "execs": [exec1,exec2,exec3],
+                "diagnostic": diagnostic
+                }
+#pour appeler un champ de test_courant
+test_courant["type"]="type def"
+#definition des execs
+exec1 ={
+        "preprocessing":[preprocess1,preprocess2,preprocess3],
+        "capture": "capture def",
+        "postprocessing":[postrocess1,postprocess2,postprocess3],
+        "browser": "firefox"
+        }
+
+capture{
+        "name":"module name",
+        
+        
+        }

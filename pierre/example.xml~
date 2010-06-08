@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <!-- '''Fichier de configuration pour les tests SVG''' -->
-<tests>
+<tests site='http://test-svg.com'> 
   <test>
     <type>
+      
     </type>
 
     <capture>

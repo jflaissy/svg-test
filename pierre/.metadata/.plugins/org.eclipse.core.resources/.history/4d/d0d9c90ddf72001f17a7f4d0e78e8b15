@@ -1,0 +1,12 @@
+'''
+Created on 8 juin 2010
+
+@author: pierrebesson
+'''
+tests=[]
+#ici c'est un tableau associatif
+test_courant = {
+                "type":"les uns contre les autres",
+                "execs": [exec1,exec2,exec3],
+                "diagnostic": diagnostic
+                }
