@@ -18,9 +18,8 @@ capture = {
         }
 
 postprocess= {
-             "name" : "name du preprocess",
-             "parameters" : ["parameter1","parameter2"],
-             "source" : "file.svg" 
+             "name":"name du preprocess",
+             "parameters": ["parameter1","parameter2"]
              }
 
 exec1 = {
