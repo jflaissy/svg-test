@@ -1,7 +1,8 @@
-from structure import Structure
+#from structure import Structure
+
+import structure_example
 
 def lire_configuration():
     print 'Lecture configuration.'
-    strct = Structure()
-    return strct
-
+    s = structure_example.getExample()
+    return s
