@@ -18,4 +18,4 @@
 
 def go(s):
     print 'Postraitement statique.'
-    s.posttraitement = True
+    #s.posttraitement = True

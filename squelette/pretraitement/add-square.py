@@ -3,6 +3,7 @@
 
 # cf. remarques posttraitement/
 
-def go(s):
-    print 'Pretraitement vide.'
-    s.pretraitement = True
+
+def go(input_file, output_file, parameters=None):
+    print 'Pretraitement add-square. in:', input_file, 'out:', output_file
+    pass
