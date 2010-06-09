@@ -11,21 +11,19 @@ class PageMaker(ContentHandler):
             self.test= True
             self.testcourant={}
             
-        if name=='type'
-            self.testcourant.[name] = name #pour ajouter une valeur dans le tableau associtif
+        #if name=='type':
+            #self.testcourant.[name] = name #pour ajouter une valeur dans le tableau associtif
             
-            
-                
     def endElement(self, name): 
         if name == 'tests':
             self.passthrough = False  
             
         if name == 'test': 
             self.test= False    
-            self.tests.append(test_courant)
+            #self.tests.append(test_courant)
                
     def characters(self, chars): 
-        if self.passthrough: self.out.write(chars)
+        print chars
 
 
 parse('parser.xml', PageMaker ())
