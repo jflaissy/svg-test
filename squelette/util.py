@@ -1,6 +1,8 @@
 # Fonctions utilitaires diverses utilisees ailleurs dans le code.
 
 import re
+import os
+import errno
 
 def importer_module(module_type, module_nom):
     """Importe un module.
@@ -15,3 +17,15 @@ def importer_module(module_type, module_nom):
 def trim_extension(filename, extension):
     m = re.search (('(.*)\.%s' % extension), filename)
     return m.group(1)
+
+def trim_extension2(filename):
+    m = re.search ('(.*)\..*', filename)
+    return m.group(1)
+
+# cree recursivement les repertoires mentionnes dans path
+# sans lever d'erreur si ils existent deja
+def mkdir_path(path):
+    try:
+        os.makedirs(path)
+    except os.error, e:
+        if e.errno != errno.EEXIST: raise

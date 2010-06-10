@@ -1,13 +1,35 @@
-FIXME: anglais ou francais
+* FIXME: anglais ou francais
 
-exec, c'est très mauvais comme nom, surtout en python. instance ?
+* exec, c'est très mauvais comme nom, surtout en python. instance ?
 
-creer un repertoire où stocker les resultats de tous les traitements
+* creer un repertoire où stocker les resultats de tous les traitements
 
-parameters : doit etre un tableau associatif { cle: valeur }, non ?
+* parameters : doit etre un tableau associatif { cle: valeur }, non ?
 pas forcement rempli dans le xml, mais alors on cree un entree 'parameters' à None ?
 
-renommer le go()
+* renommer le go()
 
-noter quelque part une definition claire des interface des modules
+* noter quelque part une definition claire des interface des modules
 "go"(in, out, par)
+
+* Les fichiers intermediaires (pre/captures/post/diag eventuellement) sont stockés dans
+le repertoire results/<pid>/.
+
+* Interfaces de modules :
+
+pre
+def go(input_file, output_file, parameters=None):
+
+cap
+def go(input_file, output_dir, parameters=None):
+
+post
+def go(input_file, output_prefix, parameters=None):
+
+
+* factoriser du code dans les lanceurs pre/post cap/diag
+
+* trouver un meilleurs endroit que results/<pid> ?
+
+
+
