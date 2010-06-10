@@ -12,7 +12,7 @@ preprocess = {
              'parameters': ['parameter1-pre','parameter2-pre']
              }
 capture = {
-        'name':'static-cap',
+        'name':'statique-cap',
         'interactions': 'interaction script',
         'parameters': ['parameter1','parameter2']        
         }
@@ -26,7 +26,8 @@ exec1 = {
         'preprocessing': { 'filters' : [preprocess,
                                         { 'name' : 'add-square', 'parameters' : None }] },
         'capture': capture,
-        'postprocessing':{'filters' : [postprocess]},#,postprocess2,postprocess3],
+        'postprocessing':{'filters' : [postprocess,
+                                       { 'name': 'sync', 'parameters': None }]},
         'browser': 'firefox'
         }
 
