@@ -12,7 +12,6 @@ import os
 conf = { }
 
 def go():
-    print 'Main.'
     # on recupere la structure
     strct = configuration.lire_configuration()
 
@@ -42,7 +41,6 @@ def lancerPretraitements(tests):
 
             filter_number = 0
             input_file = source_filename
-            # TODO(m): regler le repertoire ou on sauve.
             preprocessing['filters'].insert(0, {'name' : 'identity',
                                                 'parameters' : None })
             # Pour chaque filtre, on regle les fichiers
@@ -63,6 +61,8 @@ def lancerPretraitements(tests):
             preprocessing['output'] = output_file
 
 def lancerCaptures(tests):
+    """Lance les captures. `tests' est la grande structure de tests.
+    Le résultat de chaque capture est stocké dans capture['output']"""
     print '* Lancement des captures.'
     for test in tests:
         for instance in test['execs']:
@@ -91,7 +91,6 @@ def lancerPosttraitements(tests):
             source_basename = util.trim_extension(source_filename, 'svg')
             input_file = source_filename
             filter_number = 0
-            # TODO(m): regler le repertoire ou on sauve.
             postprocessing['filters'].insert(0, {'name' : 'identity',
                                                 'parameters' : None })
             # Pour chaque filtre, on regle les fichiers
@@ -110,7 +109,9 @@ def lancerPosttraitements(tests):
                 input_file = output_file
             # Le fichier resultat est dans postprocessing['output']
             postprocessing['output'] = output_file
-            print "resultat final: ", output_file
+
+# TODO
+# devrait ressembler à capture
 def lancerDiagnostics(struct):
     # construire les structures comparaisons, referencer les execs
     # Code bidon: pour chaque test de la structure
@@ -122,12 +123,13 @@ def lancerDiagnostics(struct):
         module.go(struct)
 
 def init():
+    """Initialise la configuration du programme. En particulier, on
+    règle les repertoires où seront sauvés les résultats
+    intermédiaires."""
     global conf
     pid = os.getpid()
-    # TODO(m): trouver un meilleur endroit
     working_directory =  os.path.join('results', '%s' % pid)
     util.mkdir_path(working_directory)
-    print 'Working directory:', working_directory
     conf['working_directory'] = working_directory
     conf['preprocessing_directory'] = os.path.join(working_directory, 'preprocessing')
     conf['capture_directory'] = os.path.join(working_directory, 'capture')
