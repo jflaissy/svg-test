@@ -24,9 +24,9 @@ postprocess= {
              }
 
 exec1 = {
-        "preprocessing":[preprocess],#1,preprocess2,preprocess3],
+        "preprocessing": { "filters" : [preprocess] }#1,preprocess2,preprocess3],
         "capture": capture,
-        "postprocessing":[postprocess],#,postprocess2,postprocess3],
+        "postprocessing": { "filters" : [postprocess] },#,postprocess2,postprocess3],
         "browser": "firefox"
         }
 

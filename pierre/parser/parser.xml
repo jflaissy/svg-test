@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- '''Fichier de configuration pour les tests SVG''' -->
+<tests >fichier_1 
+  <test>
+    <source> <!--Fichier svg --> file.svg </source>
+    <type>other<!--Tous les browsers Séparement(éventuellement un seul), les browsers les  uns contre les autres --></type>
+    <browsers><!--Ici on définit tous les navigateurs dont on a besoin-->
+      <browser>firefox</browser>
+      <browser>safari</browser>
+    </browsers>
+    <preprocessing>
+      <!-- Ici on met tous les preprocess dont on a besoin (filtre sur le svg ,...)-->
+      <preprocess>
+	<name>preporcess1<!-- Nom du fichier (python ) qui fait le preprocess sans l'extension .py--></name>
+	<parameters>
+	  <parameter>alpha=1<!--L'utilisateur peut définir ses propres parameter avec des noms a lui --></parameter>
+	  <parameter>beta=2</parameter>
+	</parameters>
+      </preprocess>
+    </preprocessing>
+    <capture>
+      <name>capt<!--Nom du fichier sans l'extension qui réalise la capture--></name>
+      <interactions>intera<!-- Script d'interacion si besoin--></interactions>
+      <parameters> 
+	<!--Parametres eventuels pour la capture-->
+	<parameter>beta=2</parameter>
+      </parameters>
+    </capture>
+   <postprocessing>
+     <!--Traitement post-capture mais avant le diagnostique final on met tous les post-process dont on a besoin-->
+        <postprocess>
+            <name>postcapt<!--Nom du fichier sans l'extension qui permet le preprocess--></name>
+            <parameters>
+	      <parameter>epsilon</parameter>
+	    </parameters>
+        </postprocess>
+    </postprocessing>
+    <diagnostic>
+      <name>diag1<!--Nom du fichier sans l'extension qui fais le diagnostic--></name>
+      <parameters><!--Liste de tous les parametres-->
+	<parameter>delta=4</parameter>
+      </parameters>
+      <reference>image.png<!--Image de référence pour effectuer une comparaison--></reference>
+    </diagnostic>
+  </test>
+  <test> 
+    <!--Autre test --> 
+  </test>
+</tests>
