@@ -118,7 +118,9 @@ class Parser(ContentHandler):
             self.source = chars#Attention il faudra le reinitialiser plus tard
         
         elif self.isType == True:
-            if chars == "alone" or "other":
+            # TODO(p) M: je pense que ca serait pas mal que 'separate' soit la valeur par defaut
+            # remplir le ['type'] avec 'separate' meme quand il y a rien dans le xml
+            if chars == "separate" or chars == "compare":
                 self.test_courant["type"] = chars #pour ajouter une valeur dans le tableau associtif
             #else print 'The Type is not correct'
 
@@ -231,8 +233,8 @@ class Parser(ContentHandler):
         elif name == 'diagnostic':
             self.isDiagnostic = False
             self.diagnostic["parameters"]=self.parameters
-            for i in range(self.n_browsers):
-                self.test_courant["execs"][i]["diagnostic"]= copy.deepcopy(self.diagnostic)
+            #for i in range(self.n_browsers):
+            self.test_courant["diagnostic"]= self.diagnostic
 
         elif name == 'reference':
             self.reference = False
@@ -242,7 +244,7 @@ class Parser(ContentHandler):
             return self.tests
         else:
             #On gere le cas ou le fichier xml n a pas ete parse on arrete le programme et on explique pourquoi
-            print >>sys.stderr,'ERROR: You must parse a xlm file first'
+            print >>sys.stderr,'ERROR: You must parse a XML file first.'
             sys.exit()
 
 

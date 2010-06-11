@@ -5,6 +5,7 @@ import util
 import rapport
 import configuration
 import os
+import sys
 import parser
 from xml.sax import parse
 
@@ -13,10 +14,10 @@ from xml.sax import parse
 
 conf = { }
 
-def go():
+def go(f='example.xml'):
     parser_Config=parser.Parser()
     #On parse
-    parse('example.xml', parser_Config)
+    parse(f, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
     strct =parser_Config.getStructure()
     #print strct
@@ -117,17 +118,47 @@ def lancerPosttraitements(tests):
             # Le fichier resultat est dans postprocessing['output']
             postprocessing['output'] = output_file
 
-# TODO
-# devrait ressembler à capture
-def lancerDiagnostics(struct):
-    # construire les structures comparaisons, referencer les execs
-    # Code bidon: pour chaque test de la structure
-    # pour chaque comparaison
-    for i in [1]:
-        module_type = 'diagnostic'
-        module_nom = 'histogramme'
-        module = util.importer_module(module_type, module_nom)
-        module.go(struct)
+def buildComparisons(tests):
+    """Pour chaque test, construit les instances de comparaisons, en
+    croisant les résultats si plusieurs navigateurs ont été lancés par
+    exemple. On met à jour les test['comparison']."""
+    for test in tests:
+        print 'test de type', test['type']
+        comparisons = [ ]
+        # type separé, on crée une comparaison par instance d'execution
+        if test['type'] == 'separate':
+            for instance in test['execs']:
+                comp = { 'instances': [ instance ] }
+                comparisons.append(comp)
+        else:
+            assert test['type'] == 'compare'
+            for instance1 in test['execs']:
+                for instance2 in test['execs']:
+                    if instance1 == instance2:
+                        continue
+                    comp = { 'instances': [ instance1, instance2 ] }
+                    comparisons.append(comp)
+        print comparisons
+        print len(comparisons), 'comparaisons'
+        test['comparisons'] = comparisons
+
+def lancerDiagnostics(tests):
+    """Lance les diagnostics. `tests' est la grande structure de
+    tests.  Pour chaque comparaison, on lance le module de diagnostic
+    défini dans la structure."""
+    print '* Lancement des captures.'
+    buildComparisons(tests)
+    for test in tests:
+        for comparison in test['comparisons']:
+            diagnostic = test['diagnostic']
+            module_nom = diagnostic['name']
+            module = util.importer_module('diagnostic', module_nom)
+            source_filename = test['source']
+            source_basename = util.trim_extension(source_filename, 'svg')
+
+            output_prefix = os.path.join(conf['capture_directory'],
+                                         source_basename)
+            output_file = module.go(comparison, output_prefix, diagnostic['parameters'])
 
 def init():
     """Initialise la configuration du programme. En particulier, on
@@ -141,8 +172,12 @@ def init():
     conf['preprocessing_directory'] = os.path.join(working_directory, 'preprocessing')
     conf['capture_directory'] = os.path.join(working_directory, 'capture')
     conf['postprocessing_directory'] = os.path.join(working_directory, 'postprocessing')
+    conf['diagnostic_directory'] = os.path.join(working_directory, 'diagnostic')
     conf['report_directory'] = os.path.join(working_directory, 'report')
 
 if __name__ == '__main__':
     init()
-    go()
+    if len(sys.argv) >= 2:
+        go(sys.argv[1])
+    else:
+        go()

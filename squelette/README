@@ -1,17 +1,17 @@
-* FIXME: anglais ou francais
+----------------------
+-- À voir :
 
-* exec, c'est très mauvais comme nom, surtout en python. instance ?
+* Les fichiers intermediaires (pre/captures/post/diag eventuellement) sont stockés dans
+le repertoire results/<pid>/.
+gérer les tests differents, les noms pas forcements uniques etc.
 
-* parameters : liste de strings, cle=valeur
 * renommer le go()
 
 * noter quelque part une definition claire des interface des modules
 "go"(in, out, par)
 
-* Les fichiers intermediaires (pre/captures/post/diag eventuellement) sont stockés dans
-le repertoire results/<pid>/.
 
-* Interfaces de modules :
+* TODO(m) Interfaces de modules :
 
 pre
 def go(input_file, output_file, parameters=None):
@@ -22,10 +22,28 @@ def go(input_file, output_dir, parameters=None):
 post
 def go(input_file, output_prefix, parameters=None):
 
+à redefinir, qui doit avoir quelle partie de la structure
 
 * factoriser du code dans les lanceurs pre/post cap/diag
 
 * trouver un meilleurs endroit que results/<pid> ?
+
+* un ID pour chaque test, chaque instance ? a mettre dans la structure
+  une fois au debut
+
+* exec, c'est très mauvais comme nom, surtout en python. instance ?
+il faut un nom pour les instances de diagnostic aussi, j'ai pris 'comparison'
+
+* definir la sortie des modules de diagnostic
+un ajout dans la structure ?
+
+----------------------
+-- Vu :
+
+* FIXME: anglais ou francais
+-> anglais
+
+* parameters : liste de strings, cle=valeur
 
 
 
