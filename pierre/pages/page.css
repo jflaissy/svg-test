@@ -1,0 +1,30 @@
+html {
+margin : 0;
+padding : 0;
+height : 100%;
+width : 100%;
+}
+
+body {
+margin : 0;
+padding : 0;
+font-family : Georgia, "Times New Roman", Times, serif;
+font-size : 0.9em;
+height : 100%;
+width : 100%;
+background-position : top;
+background-color:#dd0000;
+}
+
+div{
+	background-color: white;
+	//border: 1px solid green;
+	position: absolute;
+	left: 100px;
+	top: 300px;
+	}
+
+
+.svg_image{
+		//border:20px solid #ee1100;
+	}
