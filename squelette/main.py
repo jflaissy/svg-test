@@ -5,6 +5,8 @@ import util
 import rapport
 import configuration
 import os
+import parser
+from xml.sax import parse
 
 #from structure import Structure
 
@@ -12,8 +14,12 @@ import os
 conf = { }
 
 def go():
-    # on recupere la structure
-    strct = configuration.lire_configuration()
+    parser_Config=parser.Parser()
+    #On parse
+    parse('example.xml', parser_Config)
+    #On verifie que la methode nous renvoi bien la structure apres parsage
+    strct =parser_Config.getStructure()
+    #print strct
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport
@@ -41,6 +47,8 @@ def lancerPretraitements(tests):
 
             filter_number = 0
             input_file = source_filename
+            # TODO(m): on fait ca plusieurs fois
+            # TODO(m): espaces dans les noms de fichiers
             preprocessing['filters'].insert(0, {'name' : 'identity',
                                                 'parameters' : None })
             # Pour chaque filtre, on regle les fichiers

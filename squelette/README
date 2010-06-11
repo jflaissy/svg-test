@@ -2,11 +2,7 @@
 
 * exec, c'est très mauvais comme nom, surtout en python. instance ?
 
-* creer un repertoire où stocker les resultats de tous les traitements
-
-* parameters : doit etre un tableau associatif { cle: valeur }, non ?
-pas forcement rempli dans le xml, mais alors on cree un entree 'parameters' à None ?
-
+* parameters : liste de strings, cle=valeur
 * renommer le go()
 
 * noter quelque part une definition claire des interface des modules
