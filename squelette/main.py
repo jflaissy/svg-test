@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.6
 # -*- coding: utf-8 -*-
 
 import util
@@ -164,6 +164,12 @@ def init():
     """Initialise la configuration du programme. En particulier, on
     règle les repertoires où seront sauvés les résultats
     intermédiaires."""
+    # verifie la version
+    # besoin de 2.6 pour le kill de processus
+    if sys.version_info < (2,6):
+        print 'You need python >= 2.6 to run this program.'
+        sys.exit(2)
+
     global conf
     pid = os.getpid()
     working_directory =  os.path.join('results', '%s' % pid)

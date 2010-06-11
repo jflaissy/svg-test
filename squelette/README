@@ -18,6 +18,8 @@ def go(input_file, output_file, parameters=None):
 
 cap
 def go(input_file, output_dir, parameters=None):
+	a besoin du browser, qui est dans capture
+
 
 post
 def go(input_file, output_prefix, parameters=None):
