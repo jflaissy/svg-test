@@ -118,11 +118,12 @@ class Parser(ContentHandler):
             self.source = chars#Attention il faudra le reinitialiser plus tard
         
         elif self.isType == True:
-            # TODO(p) M: je pense que ca serait pas mal que 'separate' soit la valeur par defaut
-            # remplir le ['type'] avec 'separate' meme quand il y a rien dans le xml
             if chars == "separate" or chars == "compare":
                 self.test_courant["type"] = chars #pour ajouter une valeur dans le tableau associtif
-            #else print 'The Type is not correct'
+                #si le xml n'est pas rempli ou faux on met separate par defaut
+            else:
+                self.test_courant["type"] = 'separate'
+                print >>sys.stderr,'WARNING: THE TYPE WAS EMPTY OR EMPTY '
 
         elif self.isBrowsers == True:
             if self.isBrowser == True:
