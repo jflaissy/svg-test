@@ -2,7 +2,7 @@
   <!-- '''Fichier de configuration pour les tests SVG''' -->
 <tests >fichier_1 
   <test>
-    <source> <!--Fichier svg --> file.svg </source>
+    <source><!--Fichier svg -->file.svg</source>
     <type>other<!--Tous les browsers Séparement(éventuellement un seul), les browsers les  uns contre les autres --></type>
     <browsers><!--Ici on définit tous les navigateurs dont on a besoin-->
       <browser>firefox</browser>

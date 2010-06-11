@@ -48,7 +48,6 @@ def lancerPretraitements(tests):
             filter_number = 0
             input_file = source_filename
             # TODO(m): on fait ca plusieurs fois
-            # TODO(m): espaces dans les noms de fichiers
             preprocessing['filters'].insert(0, {'name' : 'identity',
                                                 'parameters' : None })
             # Pour chaque filtre, on regle les fichiers

@@ -1,6 +1,7 @@
 from xml.sax.handler import ContentHandler
 #from xml.sax import parse
 import sys
+import copy
 class Parser(ContentHandler):
     """Cette classe sert a parser le xml. En fait elle lit le document xml puis:
     A chaque nouvelle balise, la fonction startElement est appelle: elle traite
@@ -188,7 +189,7 @@ class Parser(ContentHandler):
         elif name == 'preprocessing':
             self.isPreprocessing = False
             for i in range(self.n_browsers):
-                self.test_courant["execs"][i]["preprocessing"]={"filters" :self.preprocessing}
+                self.test_courant["execs"][i]["preprocessing"]= {"filters" :copy.deepcopy(self.preprocessing)}
 
             #print self.test_courant["execs"][0]["preprocessing"]
             
@@ -210,7 +211,7 @@ class Parser(ContentHandler):
             self.isCapture = False
             self.capture["parameters"]=self.parameters
             for i in range(self.n_browsers):
-                self.test_courant["execs"][i]["capture"]= self.capture
+                self.test_courant["execs"][i]["capture"]= copy.deepcopy(self.capture)
             
         elif name == 'interactions':
             self.isInteractions = False
@@ -218,7 +219,7 @@ class Parser(ContentHandler):
         elif name == 'postprocessing':
             self.isPostprocessing = False
             for i in range(self.n_browsers):
-                self.test_courant["execs"][i]["postprocessing"]={"filters" :self.postprocessing}
+                self.test_courant["execs"][i]["postprocessing"]={"filters" :copy.deepcopy(self.postprocessing)}
             
             
         elif name == 'postprocess':
@@ -231,7 +232,7 @@ class Parser(ContentHandler):
             self.isDiagnostic = False
             self.diagnostic["parameters"]=self.parameters
             for i in range(self.n_browsers):
-                self.test_courant["execs"][i]["diagnostic"]= self.diagnostic
+                self.test_courant["execs"][i]["diagnostic"]= copy.deepcopy(self.diagnostic)
 
         elif name == 'reference':
             self.reference = False
