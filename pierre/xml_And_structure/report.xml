@@ -1,0 +1,20 @@
+<tests>
+  <comparaison>
+    <instances>
+      <preprocessing>
+	<preprocess></preprocess>
+	<preprocess></preprocess>
+      </preprocessing>
+      <capture></capture>
+      <postprocessing>
+	<postprocess></postprocess>
+	<postprocess></postprocess>
+      </postprocessing>
+    </instances>
+    <result>
+      <valid></valid>
+      <message></message>
+    </result>
+  </comparaison>
+  <!-- On peux avoir d'autres comparaisons-->
+</tests>
