@@ -10,6 +10,9 @@ class Parser(ContentHandler):
     cette balise et la suivante ou la balise fermante
     Enfin la balise endElement sert a traiter la fermeture de balise"""
     def __init__(self):
+        """
+        Cette methode est appele au moment de l'instanciation de la classe elle sert a definir les variables dont on a besoin dans les differentes fonctions appelees dans le parseur 
+        """
         #Bolean que verifie que la parsage est fait
         self.parsed = False
         
@@ -44,6 +47,9 @@ class Parser(ContentHandler):
         self.diagnostic = {} 
         
     def startElement(self, name, attrs):
+        """
+        Cette methode est appele a chaque fois qu'une balise est ouverte <balise> a chaque fois on va mettre le boolean associe a true et creer les structures dont on a besoin
+        """
         
         print "start", name
 
@@ -114,6 +120,9 @@ class Parser(ContentHandler):
    
             
     def characters(self, chars):
+        """
+        Cette fonction est appelee au moment on on est dans une balise et que l'on lit le texte compris dans cette balise exemple <balise> text </balise> sert a recuperre le text 
+        """
         if self.isSource == True:
             self.source = chars#Attention il faudra le reinitialiser plus tard
         
@@ -168,6 +177,9 @@ class Parser(ContentHandler):
                     self.parameters.append(chars)
 
     def endElement(self, name):
+        """ 
+        Cette fonction est appelee au moment de la fermeture de la balise </balise> elle sert a ajouter les sous structures dans la grande structure et a mettre les booleans a false pour le parcours de la structure de l'arbre
+        """
         print "end", name
         if name == 'tests':
             self.isTests = False  
