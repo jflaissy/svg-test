@@ -3,19 +3,32 @@
 <tests>
   <comparaison>
     <instances>
-      <preprocessing>
-	<preprocess>preprocess 1</preprocess>
-	<preprocess>preprocess 2</preprocess>
-      </preprocessing>
-      <capture>flie.png</capture>
-      <postprocessing>
-	<postprocess>recuperation image</postprocess>
-	<postprocess>filtre anti ailasing</postprocess>
-      </postprocessing>
+      <instance>
+	<preprocessing>
+	  <preprocess>preprocess 1</preprocess>
+	  <preprocess>preprocess 2</preprocess>
+	</preprocessing>
+	<capture>flie.png</capture>
+	<postprocessing>
+	  <postprocess>recuperation image</postprocess>
+	  <postprocess>filtre anti ailasing</postprocess>
+	</postprocessing>
+      </instance>
+      <instance>
+	<preprocessing>
+          <preprocess>preprocess 1</preprocess>
+          <preprocess>preprocess 2</preprocess>
+        </preprocessing>
+        <capture>flie.png</capture>
+        <postprocessing>
+          <postprocess>recuperation image</postprocess>
+          <postprocess>filtre anti ailasing</postprocess>
+        </postprocessing>
+      </instance>
     </instances>
     <result>
       <valid>True</valid>
-      <message>Good Dignostic</message>
+      <message>Bad Dignostic</message>
     </result>
   </comparaison>
   <!-- On peux avoir d'autres comparaisons-->
