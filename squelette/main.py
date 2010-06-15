@@ -7,7 +7,6 @@ configuration à l'export du rapport généré."""
 
 import util
 import rapport
-import configuration
 import os
 import sys
 import parser
@@ -36,6 +35,7 @@ def go(f='example.xml'):
     launchDiagnostic(strct)
 
     rapport.go(strct)
+    print strct
 
 def initalizeTests(tests):
     """Initalise la structure de tests pour faciliter l'utilisation

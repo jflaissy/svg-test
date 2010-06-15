@@ -1,7 +1,6 @@
-# un pretraitement prend un fichier svg et en fait un autre il modifie
-# le champ source de la structure.
+# -*- coding: utf-8 -*-
 
-# cf. remarques posttraitement/
+"""Posttraitement 'identité': ne modifie rien."""
 
 import shutil
 

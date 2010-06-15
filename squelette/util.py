@@ -1,4 +1,4 @@
-# Fonctions utilitaires diverses utilisees ailleurs dans le code.
+"""Fonctions utilitaires diverses utilisees ailleurs dans le code."""
 
 import re
 import os
