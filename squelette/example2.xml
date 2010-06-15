@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- '''Fichier de configuration pour les tests SVG''' -->
+<tests>
+  <test>
+    <source>file2.svg</source>
+    <type>compare</type>
+    <browsers>
+      <browser>firefox</browser>
+      <browser>chrome</browser>
+      <browser>safari</browser>
+    </browsers>
+    <preprocessing>
+      <preprocess>
+	<name>add-square</name>
+      </preprocess>
+    </preprocessing>
+    <capture>
+      <name>statique-cap</name>
+    </capture>
+   <postprocessing>
+        <postprocess>
+            <name>crop-static</name>
+        </postprocess>
+    </postprocessing>
+    <diagnostic>
+      <name>histogramme</name>
+    </diagnostic>
+  </test>
+</tests>

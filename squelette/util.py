@@ -15,12 +15,19 @@ def importer_module(module_type, module_nom):
 
 # regexp completement gratuite pour l'instant.
 def trim_extension(filename, extension):
+    base = os.path.basename(filename)
     m = re.search (('(.*)\.%s' % extension), filename)
     return m.group(1)
 
 def trim_extension2(filename):
     m = re.search ('(.*)\..*', filename)
     return m.group(1)
+
+def make_test_id(path, number):
+    base = os.path.basename(path)
+    m = re.search ('(.*)\.svg', base)
+    return "%s-%d" % (m.group(1), number)
+    
 
 # cree recursivement les repertoires mentionnes dans path
 # sans lever d'erreur si ils existent deja
