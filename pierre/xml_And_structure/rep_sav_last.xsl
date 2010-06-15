@@ -11,13 +11,20 @@
 	  <xsl:for-each select="comparaison"><!-- OPEN COMPARAISON-->
 	    <ol style='background-color:#59652F'><h3 style = 'color: #222; font-size: 21px; text-align: center;'>Liste des instances:</h3>
 	    <xsl:for-each select="instances"><!-- OPEN INSTANCES-->
-	      <table style="background-color:#59652F;"><tr>
 	      <xsl:for-each select="instance"><!-- OPEN INSTANCE-->
-		<td style='width=70%'>
+		<br />
 		 <!--position:absolute;-->
-		  <div style=" background-color:#59652F; border-style:solid; border-width:3px; width=40%;"  > 
+		     
+		<xsl:choose>
+		  <xsl:when test="number = 0">
+		    <div style=" width:40%; height:60%;top:120px ;left:50px; background-color:#59652F; border-style:solid; border-width:3px; width=30%"  >
+		  </xsl:when>
+		  <xsl:otherwise>
+		    <div style=" width:40%; height:60%;top:120px ;left:50px; background-color:#59652F; border-style:solid; border-width:3px; width=30%"  >
+		  </xsl:otherwise>
+		</xsl:choose>
 		    
-		   <li>instance</li>
+		    <li>instance</li>
 		<ul>
 		  <li> </li>
 		  <xsl:for-each select="preprocessing"><!-- OPEN PREPROCESSING-->
@@ -57,15 +64,14 @@
 		     </table>
 		  </xsl:for-each><!--  CLOSE POSTPROCESSING-->
 		</ul>
-		</div> 
-		</td>
+		</div>
 	      </xsl:for-each>  <!-- CLOSE  INSTANCE-->
-	      </tr></table>
+	      
 	    </xsl:for-each> <!-- CLOSE INSTANCES-->
 	    </ol>
 	     <!--position:absolute;-->
-	    <div style = " width:40%; height:25%;top:520px ;left:50px; background-color:#59652F; border-style:solid; border-width:3px; " >
-	    <h3 style = 'color: #222; font-size: 21px; text-align: center;'>result</h3>
+	    <div style = " width:40%; height:20%;top:520px ;left:50px; background-color:#59652F; border-style:solid; border-width:3px; width=30%" >
+	    <h3>result</h3>
 	    <table border="1" bgcolor='#A1B55D'>
 	      <tr bgcolor="#9acd32">
 		<th>Valide?</th>

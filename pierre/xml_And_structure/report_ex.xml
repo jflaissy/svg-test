@@ -4,6 +4,7 @@
   <comparaison>
     <instances>
       <instance>
+	<number>1</number>
 	<preprocessing>
 	  <preprocess>preprocess 1</preprocess>
 	  <preprocess>preprocess 2</preprocess>
@@ -15,6 +16,7 @@
 	</postprocessing>
       </instance>
       <instance>
+	<number>2</number>
 	<preprocessing>
           <preprocess>preprocess 1</preprocess>
           <preprocess>preprocess 2</preprocess>
