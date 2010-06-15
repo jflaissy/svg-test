@@ -1,12 +1,6 @@
 ----------------------
 -- À voir :
 
-* renommer le go()
-
-* noter quelque part une definition claire des interface des modules
-"go"(in, out, par)
-
-
 * TODO(m) Interfaces de modules :
 
 pre

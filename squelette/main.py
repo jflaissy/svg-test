@@ -4,7 +4,6 @@
 de la chaine de tests, depuis la lecture du fichier XML de
 configuration à l'export du rapport généré."""
 
-
 import util
 import rapport
 import os
@@ -17,8 +16,9 @@ from xml.sax import parse
 
 conf = { }
 
-def go(f='example.xml'):
+def go():
     """Pilote toute la chaine de tests."""
+    init()
     parser_Config=parser.Parser()
     #On parse
     parse(f, parser_Config)
@@ -57,8 +57,8 @@ def initalizeTests(tests):
             for postfilter in instance['postprocessing']['filters']:
                 postfilter['filter_id'] = filter_nb
                 filter_nb = filter_nb + 1
+            instance['capture']['parameters']['browser'] = instance['browser']
         test_nb = test_nb + 1
-
 
 ##
 # Lanceurs.
@@ -103,9 +103,12 @@ def launchCapture(tests):
             module_nom = capture['name']
             module = util.importer_module('capture', module_nom)
             source_filename = test['source']
-            source_basename = util.trim_extension(source_filename, 'svg')
+            output_filename = '%s-%s-%s-%s' % (test['test_id'],
+                                            instance['instance_id'],
+                                            capture['name'],
+                                            instance['browser'])
             input_file = instance['preprocessing']['output']
-            output_prefix = os.path.join(conf['capture_directory'], source_basename)
+            output_prefix = os.path.join(conf['capture_directory'], output_filename)
             output_file = module.go(input_file, output_prefix,
                                     capture['parameters'])
             capture['output'] = output_file
@@ -211,8 +214,8 @@ def init():
         util.mkdir_path(directory)
 
 if __name__ == '__main__':
-    init()
     if len(sys.argv) >= 2:
         go(sys.argv[1])
     else:
-        go()
+        print 'Usage: %s <fichier.xml>' % sys.argv[0]
+        print '\toù <fichier.xml> est le fichier de configuration des tests.'

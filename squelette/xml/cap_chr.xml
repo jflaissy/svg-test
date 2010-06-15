@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- '''Fichier de configuration pour les tests SVG''' -->
+<tests>
+  <test>
+    <source>svg/wp.svg</source>
+    <type>separate</type>
+    <browsers>
+      <browser>google-chrome</browser>
+    </browsers>
+    <preprocessing>
+    </preprocessing>
+    <capture>
+      <name>statique-cap</name>
+    </capture>
+   <postprocessing>
+    </postprocessing>
+    <diagnostic>
+      <name>always_yes</name>
+    </diagnostic>
+  </test>
+</tests>

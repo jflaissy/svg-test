@@ -39,7 +39,7 @@ class Parser(ContentHandler):
         self.tests=[]
         self.test_courant={}
         self.preprocess_courant={}
-        self.parameters = []
+        self.parameters = { }
         self.postprocess_courant={}
         self.preprocessing = []
         self.postprocessing = []
@@ -89,7 +89,7 @@ class Parser(ContentHandler):
             self.isName = True
             
         elif name == 'parameters':
-            self.parameters = []
+            self.parameters = { 'param': []}
             self.isParameters = True
 
         elif name == 'parameter':
@@ -148,7 +148,9 @@ class Parser(ContentHandler):
                     self.preprocess_courant["name"]=chars
                 elif self.isParameters == True:
                     if self.isParameter == True:
-                        self.parameters.append(chars)
+                        #self.parameters.append(chars)
+                        # M: je prefere stocker les parametres dans le champ 'param'.
+                        self.parameters['param'].append(chars)
 
         elif self.isCapture == True:
             if self.isName == True:
@@ -157,7 +159,7 @@ class Parser(ContentHandler):
                 self.capture["interactions"]=chars
             elif self.isParameters == True:
                 if self.isParameter == True:
-                    self.parameters.append(chars)
+                        self.parameters['param'].append(chars)
 
         elif self.isPostprocessing == True:
             if self.isPostprocess == True:
@@ -165,7 +167,7 @@ class Parser(ContentHandler):
                     self.postprocess_courant["name"]=chars
                 elif self.isParameters == True:
                     if self.isParameter == True:
-                        self.parameters.append(chars)
+                        self.parameters['param'].append(chars)
 
         elif self.isDiagnostic == True:
             if self.isName == True:
@@ -174,7 +176,7 @@ class Parser(ContentHandler):
                 self.diagnostic["reference"]=chars
             elif self.isParameters == True:
                 if self.isParameter == True:
-                    self.parameters.append(chars)
+                    self.parameters['param'].append(chars)
 
     def endElement(self, name):
         """ 
