@@ -16,7 +16,7 @@ def take_screenshot(filename):
     QPixmap.grabWindow(QApplication.desktop().winId()).save(output_file, format)
 
 def go(input_file, output_prefix, parameters):
-    print 'Capture statique. in:', input_file, 'out:', output_prefix
+    print 'Capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
     p = subprocess.Popen([parameters['browser'], page_path])

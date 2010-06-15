@@ -16,12 +16,12 @@ from xml.sax import parse
 
 conf = { }
 
-def go():
+def go(config_file):
     """Pilote toute la chaine de tests."""
     init()
     parser_Config=parser.Parser()
     #On parse
-    parse(f, parser_Config)
+    parse(config_file, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
     strct = parser_Config.getStructure()
     #print strct
@@ -47,7 +47,7 @@ def initalizeTests(tests):
         print test['test_id']
         instance_nb = 1
         for instance in test['execs']:
-            instance['instance_id'] = "%d" % instance_nb
+            instance['instance_id'] = "%d_%s" % (instance_nb, instance['browser'])
             instance_nb = instance_nb + 1
             filter_nb = 1
             for prefilter in instance['preprocessing']['filters']:
@@ -103,10 +103,9 @@ def launchCapture(tests):
             module_nom = capture['name']
             module = util.importer_module('capture', module_nom)
             source_filename = test['source']
-            output_filename = '%s-%s-%s-%s' % (test['test_id'],
+            output_filename = '%s-%s-%s' % (test['test_id'],
                                             instance['instance_id'],
-                                            capture['name'],
-                                            instance['browser'])
+                                            capture['name'])
             input_file = instance['preprocessing']['output']
             output_prefix = os.path.join(conf['capture_directory'], output_filename)
             output_file = module.go(input_file, output_prefix,
@@ -158,6 +157,7 @@ def buildComparisons(tests):
             for instance in test['execs']:
                 comp = { 'instances': [ instance ] }
                 comparisons.append(comp)
+                comp['comparison_id'] = instance['instance_id']
         else:
             assert test['type'] == 'compare'
             for instance1 in test['execs']:
@@ -165,6 +165,8 @@ def buildComparisons(tests):
                     if instance1 == instance2:
                         continue
                     comp = { 'instances': [ instance1, instance2 ] }
+                    comp['comparison_id'] = instance1['instance_id'] \
+                        + '_' + instance2['instance_id']
                     comparisons.append(comp)
         print comparisons
         print len(comparisons), 'comparaisons'
@@ -178,15 +180,15 @@ def launchDiagnostic(tests):
     buildComparisons(tests)
     for test in tests:
         for comparison in test['comparisons']:
+
             diagnostic = test['diagnostic']
             module_nom = diagnostic['name']
             module = util.importer_module('diagnostic', module_nom)
             source_filename = test['source']
-            source_basename = util.trim_extension(source_filename, 'svg')
+#            source_basename = util.trim_extension(source_filename, 'svg')
 
-            output_prefix = os.path.join(conf['capture_directory'],
-                                         source_basename)
-            output_file = module.go(comparison, output_prefix, diagnostic['parameters'])
+            output_prefix = os.path.join(conf['capture_directory'], comparison['comparison_id'] )
+            module.go(comparison, output_prefix, diagnostic['parameters'])
 
 def init():
     """Initialise la configuration du programme. En particulier, on
