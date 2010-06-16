@@ -8,8 +8,8 @@ def buildKeyValue(doc, key, value):
 def buildParameters(doc, parametersList):
     parametersElt = doc.createElement("parameters")
     if parametersList!=None :
-        for parameter in parametersList:
-            parametersElt.appendChild(buildKeyValue(doc, "parameter", parameter))       
+        for key, value in parametersList.items():
+            parametersElt.appendChild(buildKeyValue(doc, key, value))      
     return parametersElt
 
 def serializeCapture(doc, capture):
