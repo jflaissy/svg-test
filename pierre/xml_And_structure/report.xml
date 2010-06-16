@@ -1,5 +1,6 @@
 <tests>
-  <comparaison>
+  <test>
+  <comparison>
     <instances>
       <preprocessing>
 	<preprocess></preprocess>
@@ -15,6 +16,7 @@
       <valid></valid>
       <message></message>
     </result>
-  </comparaison>
+  </comparison>
+  </test>
   <!-- On peux avoir d'autres comparaisons-->
 </tests>
