@@ -111,6 +111,7 @@ def launchCapture(tests):
             output_file = module.go(input_file, output_prefix,
                                     capture['parameters'])
             capture['output'] = output_file
+            print '-----i1', output_file
 
 def launchPostprocessing(tests):
     """Lance la serie des posttraitements tels que definis dans la stucture `tests'.
@@ -123,7 +124,9 @@ def launchPostprocessing(tests):
             postprocessing = instance['postprocessing']
             # Les fichiers resultats intermédiaires sont
             source_filename = test['source']
-            input_file = source_filename
+
+            input_file = instance['capture']['output']
+            print '-----i2', input_file
             postprocessing['filters'].insert(0, {'name' : 'identity',
                                                  'filter_id' : 0,
                                                 'parameters' : None })
@@ -188,7 +191,8 @@ def launchDiagnostic(tests):
 #            source_basename = util.trim_extension(source_filename, 'svg')
 
             output_prefix = os.path.join(conf['capture_directory'], comparison['comparison_id'] )
-            module.go(comparison, output_prefix, diagnostic['parameters'])
+            #module.go(comparison, output_prefix, diagnostic['parameters'])
+            module.go(comparison, output_prefix, diagnostic)
 
 def init():
     """Initialise la configuration du programme. En particulier, on
