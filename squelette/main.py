@@ -5,11 +5,10 @@ de la chaine de tests, depuis la lecture du fichier XML de
 configuration à l'export du rapport généré."""
 
 import util
-import rapport
 import os
 import sys
 import parser_xml
-#import report
+import report
 from xml.sax import parse
 
 #from structure import Structure
@@ -36,7 +35,7 @@ def go(config_file):
     launchDiagnostic(tests)
 
     #rapport.go(tests)
-    #launchReport(tests)
+    launchReport(tests)
     print tests
 
 def initalizeTests(tests):
@@ -199,7 +198,7 @@ def launchDiagnostic(tests):
 def launchReport(tests):
     """Lance le générateur de rapport."""
     print '* Lancement du rapport.'
-    os.path.join(conf['report_directory'], 'report.xml')
+    output_file = os.path.join(conf['report_directory'], 'report.xml')
     report.go(tests, output_file)
 
 def init():
