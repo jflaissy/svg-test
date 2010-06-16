@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <?xml-stylesheet type="text/xsl" href="report_ex.xsl"?>
 <tests>
-  <comparaison>
-    <instances>
-      <instance>
-	<number>1</number>
-	<preprocessing>
-	  <preprocess>preprocess 1</preprocess>
-	  <preprocess>preprocess 2</preprocess>
-	</preprocessing>
-	<capture>flie.png</capture>
-	<postprocessing>
-	  <postprocess>recuperation image</postprocess>
-	  <postprocess>filtre anti ailasing</postprocess>
-	</postprocessing>
-      </instance>
-      <instance>
-	<number>2</number>
-	<preprocessing>
-          <preprocess>preprocess 1</preprocess>
-          <preprocess>preprocess 2</preprocess>
-        </preprocessing>
-        <capture>flie.png</capture>
-        <postprocessing>
-          <postprocess>recuperation image</postprocess>
-          <postprocess>filtre anti ailasing</postprocess>
-        </postprocessing>
-      </instance>
-    </instances>
-    <result>
-      <valid>True</valid>
-      <message>Bad Dignostic</message>
-    </result>
-  </comparaison>
+  <test>
+    <comparison>
+      <instances>
+	<instance>
+	  <number>1</number>
+	  <preprocessing>
+	    <preprocess>preprocess 1</preprocess>
+	    <preprocess>preprocess 2</preprocess>
+	  </preprocessing>
+	  <capture>flie.png</capture>
+	  <postprocessing>
+	    <postprocess>recuperation image</postprocess>
+	    <postprocess>filtre anti ailasing</postprocess>
+	  </postprocessing>
+	</instance>
+	<instance>
+	  <number>2</number>
+	  <preprocessing>
+	    <preprocess>preprocess 1</preprocess>
+	    <preprocess>preprocess 2</preprocess>
+	  </preprocessing>
+	  <capture>flie.png</capture>
+	  <postprocessing>
+	    <postprocess>recuperation image</postprocess>
+	    <postprocess>filtre anti ailasing</postprocess>
+	  </postprocessing>
+	</instance>
+      </instances>
+      <result>
+	<valid>True</valid>
+	<message>Bad Dignostic</message>
+      </result>
+    </comparison>
   <!-- On peux avoir d'autres comparaisons-->
+  </test>
 </tests>
