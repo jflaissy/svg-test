@@ -3,10 +3,8 @@
 <tests>
   <test>
     <source>svg/wp.svg</source>
-    <type>compare</type>
+    <type>separate</type>
     <browsers>
-
-      <browser>google-chrome</browser>
       <browser>firefox</browser>
     </browsers>
     <preprocessing>
@@ -21,6 +19,7 @@
     </postprocessing>
     <diagnostic>
       <name>pixelscomparison</name>
+      <reference>bmp/ref.bmp</reference>
     </diagnostic>
   </test>
 </tests>

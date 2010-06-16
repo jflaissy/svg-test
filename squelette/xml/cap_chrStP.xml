@@ -3,11 +3,9 @@
 <tests>
   <test>
     <source>svg/wp.svg</source>
-    <type>compare</type>
+    <type>separate</type>
     <browsers>
-
       <browser>google-chrome</browser>
-      <browser>firefox</browser>
     </browsers>
     <preprocessing>
     </preprocessing>
@@ -15,9 +13,9 @@
       <name>statique-cap</name>
     </capture>
    <postprocessing>
-     <postprocess>
-       <name>statique</name>
-     </postprocess>
+    <postprocess>
+     <name>statique</name>
+    </postprocess>
     </postprocessing>
     <diagnostic>
       <name>pixelscomparison</name>

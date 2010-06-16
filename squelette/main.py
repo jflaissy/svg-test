@@ -8,7 +8,7 @@ import util
 import rapport
 import os
 import sys
-import parser
+import parser_xml
 from xml.sax import parse
 
 #from structure import Structure
@@ -19,12 +19,12 @@ conf = { }
 def go(config_file):
     """Pilote toute la chaine de tests."""
     init()
-    parser_Config=parser.Parser()
+    parser_Config=parser_xml.Parser()
     #On parse
     parse(config_file, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
     strct = parser_Config.getStructure()
-    #print strct
+    print strct
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport

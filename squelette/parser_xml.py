@@ -114,7 +114,7 @@ class Parser(ContentHandler):
              self.diagnostic = {}
 
         elif name == 'reference':
-            self.reference = True
+            self.isReference = True
         
 
    
@@ -170,10 +170,14 @@ class Parser(ContentHandler):
                         self.parameters['param'].append(chars)
 
         elif self.isDiagnostic == True:
+            
             if self.isName == True:
+                print '@@@@@@@@ '
                 self.diagnostic["name"]=chars
             elif self.isReference == True:
+                print '!!!!!!!!!!!! BOUM'
                 self.diagnostic["reference"]=chars
+                print chars
             elif self.isParameters == True:
                 if self.isParameter == True:
                     self.parameters['param'].append(chars)
@@ -252,7 +256,7 @@ class Parser(ContentHandler):
             self.test_courant["diagnostic"]= self.diagnostic
 
         elif name == 'reference':
-            self.reference = False
+            self.isReference = False
         
     def getStructure(self):
         if self.parsed == True:
