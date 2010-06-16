@@ -9,6 +9,7 @@ import rapport
 import os
 import sys
 import parser_xml
+#import report
 from xml.sax import parse
 
 #from structure import Structure
@@ -23,19 +24,20 @@ def go(config_file):
     #On parse
     parse(config_file, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
-    strct = parser_Config.getStructure()
-    print strct
+    tests = parser_Config.getStructure()
+    print tests
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport
-    initalizeTests(strct)
-    launchPreprocessing(strct)
-    launchCapture(strct)
-    launchPostprocessing(strct)
-    launchDiagnostic(strct)
+    initalizeTests(tests)
+    launchPreprocessing(tests)
+    launchCapture(tests)
+    launchPostprocessing(tests)
+    launchDiagnostic(tests)
 
-    rapport.go(strct)
-    print strct
+    #rapport.go(tests)
+    #launchReport(tests)
+    print tests
 
 def initalizeTests(tests):
     """Initalise la structure de tests pour faciliter l'utilisation
@@ -193,6 +195,12 @@ def launchDiagnostic(tests):
             output_prefix = os.path.join(conf['capture_directory'], comparison['comparison_id'] )
             #module.go(comparison, output_prefix, diagnostic['parameters'])
             module.go(comparison, output_prefix, diagnostic)
+
+def launchReport(tests):
+    """Lance le générateur de rapport."""
+    print '* Lancement du rapport.'
+    os.path.join(conf['report_directory'], 'report.xml')
+    report.go(tests, output_file)
 
 def init():
     """Initialise la configuration du programme. En particulier, on

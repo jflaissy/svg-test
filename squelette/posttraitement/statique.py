@@ -2,6 +2,10 @@ import Image
 import random
 
 def go(input_file, output_prefix, parameters=None):
+    """Module de recalibrage des captures d'ecran.
+    Il detecte les coordonnees et la taille du rectangle rouge entourant l'image svg,
+    puis il recherche les coordonnees de l'image svg a l'interieur de la zone rouge
+    et enfin il enregistre le rendu de l'image svg dans une nouvelle image """
     print 'le code de nicolas. in:', input_file, 'output_p:', output_prefix
     #chargement image
     im = Image.open(input_file)
