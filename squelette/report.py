@@ -1,3 +1,7 @@
+import sys
+reload(sys)
+sys.setdefaultencoding("utf_8")
+
 
 
 def buildKeyValue(doc, key, value):
@@ -19,6 +23,19 @@ def serializeCapture(doc, capture):
     captureElt.appendChild(buildParameters(doc, capture["parameters"]))
     return captureElt
 
+def serializeResult(doc, result):
+    resultElt = doc.createElement("result")
+    resultElt.appendChild(buildKeyValue(doc, "message", result["message"]))
+    resultElt.appendChild(buildKeyValue(doc, "valid", "%s" % result["valid"]))
+    return resultElt
+
+def serializeDiagnostic(doc, diagnostic):
+    diagnosticElt = doc.createElement("diagnostic")
+    diagnosticElt.appendChild(buildKeyValue(doc, "name", diagnostic["name"]))
+    diagnosticElt.appendChild(buildKeyValue(doc, "reference", diagnostic["reference"]))
+    diagnosticElt.appendChild(buildParameters(doc, diagnostic["parameters"]))
+    return diagnosticElt
+
 def serializePreprocessing(doc, preprocessing):
     preprocessingElt = doc.createElement("preprocessing")
     preprocessingElt.appendChild(buildKeyValue(doc, "output", preprocessing["output"]))
@@ -30,7 +47,7 @@ def serializePreprocessing(doc, preprocessing):
         preprocessingElt.appendChild(preprocessElt)
     return preprocessingElt
 
-def serializePostprocess(doc, postprocessing):
+def serializePostprocessing(doc, postprocessing):
     postprocessingElt = doc.createElement("postprocessing")
     postprocessingElt.appendChild(buildKeyValue(doc, "output", postprocessing["output"]))
     for filter in postprocessing["filters"]:
@@ -51,12 +68,13 @@ def serializeComparison(doc, comparison):
         
         instanceElt.appendChild(serializePreprocessing(doc, instance["preprocessing"]))
         instanceElt.appendChild(serializeCapture(doc, instance["capture"]))
-        instanceElt.appendChild(serializePreprocessing(doc, instance["postprocessing"]))
+        instanceElt.appendChild(serializePostprocessing(doc, instance["postprocessing"]))
         
         instanceElt.appendChild(buildKeyValue(doc,"browser",instance["browser"]))
         instancesElt.appendChild(instanceElt)
     
     comparisonsElt.appendChild(instancesElt)
+    comparisonsElt.appendChild(serializeResult(doc, comparison["result"]))
     
     return comparisonsElt
 
@@ -69,15 +87,17 @@ def go(tests, output_file) :
     for test in tests:
         testElt = doc.createElement("test")
         testsElt.appendChild(testElt)
-
+        testElt.appendChild(serializeDiagnostic(doc, test["diagnostic"]))
+        
         #serialize comparisons
         comparisons = doc.createElement("comparisons")
         for comparison in test["comparisons"]: 
             comparisons.appendChild(serializeComparison(doc, comparison))
         testElt.appendChild(comparisons)
+        
     
     logfile = open(output_file, 'w')
-    logfile.write(doc.toprettyxml(indent="    "))
+    logfile.write(doc.toprettyxml(indent="    ", encoding="UTF-8"))
     logfile.close()
 
 
