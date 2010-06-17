@@ -5,7 +5,9 @@ import subprocess
 import time
 import sys
 import os
+import shutil
 from PyQt4.QtGui import QPixmap, QApplication
+
 
 def take_screenshot(filename):
     """Effectue une copie d'écran, stocke le résultat dans `filename'
@@ -15,11 +17,20 @@ def take_screenshot(filename):
     output_file = filename + '.' + format
     QPixmap.grabWindow(QApplication.desktop().winId()).save(output_file, format)
     return output_file
-    
+
+def setup_file(filename):
+    """Met en place le fichier SVG qui sera chargé par le navigateur."""
+    file_path = os.path.join(os.getcwd(), 'capture',
+                             'statique-cap-files', 'file.svg')
+
+    shutil.copyfile(filename, file_path)
+
+
 def go(input_file, output_prefix, parameters):
     print 'Capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
+    setup_file(input_file)
     p = subprocess.Popen([parameters['browser'], page_path])
     print 'sleep 10s...'
     time.sleep(10)
