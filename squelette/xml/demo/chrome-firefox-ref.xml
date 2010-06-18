@@ -5,8 +5,9 @@
     <source>svg/wp.svg</source>
     <type>separate</type>
     <browsers>
-      <browser>firefox</browser>
+
       <browser>google-chrome</browser>
+      <browser>firefox</browser>
     </browsers>
     <preprocessing>
     </preprocessing>
@@ -14,9 +15,13 @@
       <name>statique-cap</name>
     </capture>
    <postprocessing>
+     <postprocess>
+       <name>statique</name>
+     </postprocess>
     </postprocessing>
     <diagnostic>
-      <name>always_yes</name>
+      <name>pixelscomparison</name>
+      <reference>bmp/ref.bmp</reference>
     </diagnostic>
   </test>
 </tests>

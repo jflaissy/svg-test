@@ -24,7 +24,7 @@ def go(config_file):
     parse(config_file, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
     tests = parser_Config.getStructure()
-    print tests
+    #print tests
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport
@@ -36,7 +36,7 @@ def go(config_file):
 
     #rapport.go(tests)
     launchReport(tests)
-    print tests
+    #print tests
 
 def initalizeTests(tests):
     """Initalise la structure de tests pour faciliter l'utilisation
@@ -45,7 +45,7 @@ def initalizeTests(tests):
     test_nb = 1
     for test in tests:
         test['test_id'] = util.make_test_id(test['source'], test_nb)
-        print test['test_id']
+        #print test['test_id']
         instance_nb = 1
         for instance in test['execs']:
             instance['instance_id'] = "%d_%s" % (instance_nb, instance['browser'])
@@ -112,7 +112,6 @@ def launchCapture(tests):
             output_file = module.go(input_file, output_prefix,
                                     capture['parameters'])
             capture['output'] = output_file
-            print '-----i1', output_file
 
 def launchPostprocessing(tests):
     """Lance la serie des posttraitements tels que definis dans la stucture `tests'.
@@ -127,7 +126,6 @@ def launchPostprocessing(tests):
             source_filename = test['source']
 
             input_file = instance['capture']['output']
-            print '-----i2', input_file
             postprocessing['filters'].insert(0, {'name' : 'identity',
                                                  'filter_id' : 0,
                                                 'parameters' : None })
@@ -154,7 +152,6 @@ def buildComparisons(tests):
     croisant les résultats si plusieurs navigateurs ont été lancés par
     exemple. On met à jour les test['comparison']."""
     for test in tests:
-        print 'test de type', test['type']
         comparisons = [ ]
         # type separé, on crée une comparaison par instance d'execution
         if test['type'] == 'separate':
@@ -172,8 +169,6 @@ def buildComparisons(tests):
                     comp['comparison_id'] = instance1['instance_id'] \
                         + '_' + instance2['instance_id']
                     comparisons.append(comp)
-        print comparisons
-        print len(comparisons), 'comparaisons'
         test['comparisons'] = comparisons
 
 def launchDiagnostic(tests):
@@ -223,7 +218,6 @@ def init():
     conf['report_directory'] = os.path.join(working_directory, 'report')
     util.mkdir_path(working_directory)
     for directory in conf.values():
-        print directory
         util.mkdir_path(directory)
 
 if __name__ == '__main__':

@@ -1,6 +1,8 @@
 ----------------------
 -- À voir :
 
+* probleme formattage du report.xml : trop d'espaces.
+
 * un bug au lancement de plusieurs browser ? cf. xml/cap_fc*
 
 * TODO(m) Interfaces de modules :

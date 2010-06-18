@@ -1,0 +1,4 @@
+./main.py xml/demo/firefox-ref.xml 
+
+./main.py xml/demo/chrome-firefox-comp.xml 
+

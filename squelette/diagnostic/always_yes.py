@@ -3,7 +3,5 @@
 
 def go(comparison, output_prefix, diagnostic):
     print 'Diagnostic Always_yes. '
-    print comparison
     comparison['result'] = { 'valid' : True, 'message' : '' }
-    
     return None

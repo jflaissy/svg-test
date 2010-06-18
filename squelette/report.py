@@ -1,3 +1,6 @@
+
+# -*- coding: utf-8 -*-
+
 import sys
 reload(sys)
 sys.setdefaultencoding("utf_8")
@@ -98,8 +101,9 @@ def go(tests, output_file) :
         
     
     logfile = open(output_file, 'w')
-    logfile.write(doc.toprettyxml(indent="    ", encoding="UTF-8"))
+    logfile.write(doc.toprettyxml(indent="  ", encoding="UTF-8"))
     logfile.close()
 
+    print 'Le fichier résultat est', output_file
 
 

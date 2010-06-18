@@ -32,14 +32,15 @@ def go(input_file, output_prefix, parameters):
                              'statique-cap-files', 'page.html')
     setup_file(input_file)
     p = subprocess.Popen([parameters['browser'], page_path])
-    print 'sleep 10s...'
+    print '\t\tSleep 10s...',
     time.sleep(10)
-    print 'ok'
+    print 'ok.'
     output_file = take_screenshot(output_prefix)
     p.kill()
     return output_file
 
 
+#en PIL sous windows
 #import ImageGrab
 #img = ImageGrab.grab()
 #img.save('test.jpg','JPEG')
