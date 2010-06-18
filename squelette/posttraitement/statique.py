@@ -41,6 +41,8 @@ def go(input_file, output_prefix, parameters=None):
                 zoneRougeTrouve=1
                 break
             posgxr=posgxr+pas
+            if(posgxr>=width):
+                return -1
             color= pix[posgxr,posyr]
   
     #recherche ordonnee segment superieur cadre rouge

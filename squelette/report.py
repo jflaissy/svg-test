@@ -32,7 +32,8 @@ def serializeResult(doc, result):
 def serializeDiagnostic(doc, diagnostic):
     diagnosticElt = doc.createElement("diagnostic")
     diagnosticElt.appendChild(buildKeyValue(doc, "name", diagnostic["name"]))
-    diagnosticElt.appendChild(buildKeyValue(doc, "reference", diagnostic["reference"]))
+    if "reference" in diagnostic:
+        diagnosticElt.appendChild(buildKeyValue(doc, "reference", diagnostic["reference"]))
     diagnosticElt.appendChild(buildParameters(doc, diagnostic["parameters"]))
     return diagnosticElt
 
