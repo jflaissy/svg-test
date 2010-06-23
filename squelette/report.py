@@ -85,6 +85,7 @@ def serializeComparison(doc, comparison):
 def go(tests, output_file) :
     from xml.dom.minidom import Document
     doc = Document()
+    doc.appendChild(doc.createProcessingInstruction("xml-stylesheet","type=\"text/xsl\" href=\"xslt/report.xsl\""))
     testsElt = doc.createElement("tests")
     doc.appendChild(testsElt)
 
