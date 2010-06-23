@@ -11,6 +11,10 @@
     </preprocessing>
     <capture>
       <name>statique_cap</name>
+      <parameters>
+        <width>300</width>
+        <height>200</height>
+      </parameters>
     </capture>
    <postprocessing>
      <postprocess>

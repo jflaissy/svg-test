@@ -37,6 +37,8 @@ def serializeDiagnostic(doc, diagnostic):
     diagnosticElt.appendChild(buildKeyValue(doc, "name", diagnostic["name"]))
     if "reference" in diagnostic:
         diagnosticElt.appendChild(buildKeyValue(doc, "reference", diagnostic["reference"]))
+    print 'zouzouz'
+    print diagnostic
     diagnosticElt.appendChild(buildParameters(doc, diagnostic["parameters"]))
     return diagnosticElt
 

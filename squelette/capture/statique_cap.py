@@ -54,8 +54,9 @@ def setup_file(filename, parameters):
     footfile = open(footer, 'r')
     dest.write(headfile.read())
     # (TODO(m): à supprimer quand c'est bon)
-    parameters['height'] = "400"
-    parameters['width'] = "400"
+    #parameters['height'] = "400"
+    #parameters['width'] = "400"
+    print parameters
     # Ecriture des parametres dynamiques : nom de fichier, taille
     dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
                + "\" width=\"" + parameters['width'] + "\"")

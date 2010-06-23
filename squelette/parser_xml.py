@@ -35,6 +35,8 @@ class Parser(ContentHandler):
         self.isDiagnostic = False
         self.isReference = False
         self.n_browsers = 0
+        self.isWidth = False;
+        self.isHeight = False;
         #definition des tableaux de la structure
         self.tests=[]
         self.test_courant={}
@@ -51,7 +53,7 @@ class Parser(ContentHandler):
         Cette methode est appele a chaque fois qu'une balise est ouverte <balise> a chaque fois on va mettre le boolean associe a true et creer les structures dont on a besoin
         """
         
-        #print "start", name
+        print "start", name
 
         if name == 'tests':
             self.parsed = True
@@ -115,6 +117,13 @@ class Parser(ContentHandler):
 
         elif name == 'reference':
             self.isReference = True
+            
+        elif name == 'width':
+        	self.isWidth = True
+        	
+       	elif name == 'height':
+       		self.isHeight = True
+       	
         
 
    
@@ -160,6 +169,15 @@ class Parser(ContentHandler):
             elif self.isParameters == True:
                 if self.isParameter == True:
                         self.parameters['param'].append(chars)
+                elif self.isWidth == True:
+                        self.parameters['width']=chars
+                        print 'UUUU'
+                        print chars
+                elif self.isHeight == True:
+                        self.parameters['height']=chars
+                        print 'VVVV'
+                        print chars
+
 
         elif self.isPostprocessing == True:
             if self.isPostprocess == True:
@@ -168,16 +186,12 @@ class Parser(ContentHandler):
                 elif self.isParameters == True:
                     if self.isParameter == True:
                         self.parameters['param'].append(chars)
-
+                        
         elif self.isDiagnostic == True:
-            
             if self.isName == True:
-                #print '@@@@@@@@ '
                 self.diagnostic["name"]=chars
             elif self.isReference == True:
-                #print '!!!!!!!!!!!! BOUM'
                 self.diagnostic["reference"]=chars
-                #print chars
             elif self.isParameters == True:
                 if self.isParameter == True:
                     self.parameters['param'].append(chars)
@@ -186,7 +200,7 @@ class Parser(ContentHandler):
         """ 
         Cette fonction est appelee au moment de la fermeture de la balise </balise> elle sert a ajouter les sous structures dans la grande structure et a mettre les booleans a false pour le parcours de la structure de l'arbre
         """
-        #print "end", name
+        print "end", name
         if name == 'tests':
             self.isTests = False  
             
@@ -247,7 +261,7 @@ class Parser(ContentHandler):
             self.isPostprocess = False
             self.postprocess_courant["parameters"] = self.parameters
             self.postprocessing.append(self.postprocess_courant)
-            #print 'post cournat ', self.postprocessing
+            print 'post cournat ', self.postprocessing
 
         elif name == 'diagnostic':
             self.isDiagnostic = False
@@ -257,6 +271,12 @@ class Parser(ContentHandler):
 
         elif name == 'reference':
             self.isReference = False
+            
+        elif name == 'width':
+        	self.isWidth = False;
+        	
+       	elif name == 'height':
+       		self.isHeight = False;
         
     def getStructure(self):
         if self.parsed == True:

@@ -24,7 +24,8 @@ def go(config_file):
     parse(config_file, parser_Config)
     #On verifie que la methode nous renvoi bien la structure apres parsage
     tests = parser_Config.getStructure()
-    #print tests
+    print 'TTTTTTTTTTTTTTT'
+    print tests
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport
@@ -58,6 +59,8 @@ def initalizeTests(tests):
             for postfilter in instance['postprocessing']['filters']:
                 postfilter['filter_id'] = filter_nb
                 filter_nb = filter_nb + 1
+            print 'BBBBBBBBBBBOUM!'
+            print instance['capture']
             instance['capture']['parameters']['browser'] = instance['browser']
         test_nb = test_nb + 1
 

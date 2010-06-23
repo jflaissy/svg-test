@@ -1,4 +1,4 @@
-
+"""Module de comparaison d'image pixel par pixel."""
 # -*- coding: utf-8 -*-
 
 import Image
