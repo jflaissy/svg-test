@@ -2,7 +2,7 @@
   <!-- '''Fichier de configuration pour les tests SVG''' -->
 <tests>
   <test>
-    <source>svg/wp.svg</source>
+    <source>http://www.w3.org/Graphics/SVG/Test/20061213/svggen/styling-css-02-b.svg</source>
     <type>separate</type>
     <browsers>
       <browser>firefox</browser>
