@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- '''Fichier de configuration pour les tests SVG''' -->
+<tests>
+  <test>
+    <source>svg/wp.svg</source>
+    <type>separate</type>
+    <browsers>
+      <browser>firefox</browser>
+    </browsers>
+    <preprocessing>
+      <preprocess>
+	<name>remove_text</name>
+      </preprocess>
+    </preprocessing>
+    <capture>
+      <name>statique_cap</name>
+      <parameters>
+        <width>300</width>
+        <height>200</height>
+      </parameters>
+    </capture>
+   <postprocessing>
+     <postprocess>
+       <name>statique</name>
+     </postprocess>
+    </postprocessing>
+    <diagnostic>
+      <name>pixelscomparison</name>
+      <reference>bmp/ref.bmp</reference>
+    </diagnostic>
+  </test>
+</tests>
