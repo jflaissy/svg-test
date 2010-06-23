@@ -1,0 +1,9 @@
+###
+# -*- coding: utf-8 -*-
+"""Prétraitement blablabla."""
+
+import subprocess
+
+def go(input_file, output_file, parameters=None):
+     p = subprocess.Popen(['xsltproc', '-o', output_file,'../xsl/svg_filter_text.xsl', input_file])
+##
