@@ -170,9 +170,9 @@ class Parser(ContentHandler):
                 if self.isParameter == True:
                         self.parameters['param'].append(chars)
                 elif self.isWidth == True:
-                        self.parameters['width']=chars
+                        self.parameters['width'].append(chars)
                 elif self.isHeight == True:
-                        self.parameters['height']=chars
+                        self.parameters['height'].append(chars)
 
         elif self.isPostprocessing == True:
             if self.isPostprocess == True:

@@ -1,5 +1,5 @@
 #Partie ou on parse notre fichier xml
-import ../parser
+import parser
 from xml.sax import parse
 
 #Partie ou on parse notre fichier xml

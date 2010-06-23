@@ -24,8 +24,6 @@
       <parameters> 
 	<!--Parametres eventuels pour la capture-->
 	<parameter>beta=2</parameter>
-	<width>12</width>
-	<height>14</height>
       </parameters>
     </capture>
    <postprocessing>
