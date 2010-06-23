@@ -6,7 +6,7 @@ def go(input_file, output_prefix, parameters=None):
     Il detecte les coordonnees et la taille du rectangle rouge entourant l'image svg,
     puis il recherche les coordonnees de l'image svg a l'interieur de la zone rouge
     et enfin il enregistre le rendu de l'image svg dans une nouvelle image """
-    print 'Postprocessing statique. in:', input_file, 'output_p:', output_prefix
+    print 'le code de nicolas. in:', input_file, 'output_p:', output_prefix
     #chargement image
     im = Image.open(input_file)
     
@@ -18,6 +18,7 @@ def go(input_file, output_prefix, parameters=None):
     #parametres detection zone rouge
     posyr=0
     zoneRougeTrouve= 0
+    n=0
     pas=2#pas de recherche de la zone rouge
     poshyr=0#ordonnee segment superieur cadre rouge
     posbyr=0#ordonnee segment inferieur cadre rouge
@@ -41,9 +42,12 @@ def go(input_file, output_prefix, parameters=None):
                 zoneRougeTrouve=1
                 break
             posgxr=posgxr+pas
-            #if(posgxr>=width):
-            #    return -1
             color= pix[posgxr,posyr]
+        if n>400 :
+            output= "%s.bmp" % output_prefix
+            im.save(output)
+            return output
+        n=n+1
   
     #recherche ordonnee segment superieur cadre rouge
     poshyr=posyr
