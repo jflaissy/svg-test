@@ -40,7 +40,7 @@ def screenshot_pil(filename):
     img.save(output_file, format)
     return output_file
 
-def setup_file(filename):
+def setup_file(filename, parameters):
     """Met en place la page HTML (faisant référence au SVG) qui sera
     chargé par le navigateur."""
     cap_dir = os.path.join(os.getcwd(), 'capture',
@@ -53,8 +53,12 @@ def setup_file(filename):
     headfile = open(header, 'r')
     footfile = open(footer, 'r')
     dest.write(headfile.read())
-    # Ecriture des parametres dynamiques : nom de fichier, taille (TODO(m): à faire)
-    dest.write('src=\"' + file_path + "\"")
+    # (TODO(m): à supprimer quand c'est bon)
+    parameters['height'] = "400"
+    parameters['width'] = "400"
+    # Ecriture des parametres dynamiques : nom de fichier, taille
+    dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
+               + "\" width=\"" + parameters['width'] + "\"")
     dest.write(footfile.read())
     dest.close()
     headfile.close()
@@ -64,7 +68,7 @@ def go(input_file, output_prefix, parameters):
     print 'Capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
-    setup_file(input_file)
+    setup_file(input_file, parameters)
     p = subprocess.Popen([parameters['browser'], page_path])
     print '\t\tSleep 10s...',
     time.sleep(10)
