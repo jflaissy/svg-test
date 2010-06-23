@@ -36,7 +36,7 @@ class Parser(ContentHandler):
         self.isReference = False
         self.n_browsers = 0
         self.isWidth = False;
-		self.isHeight = False;
+        self.isHeight = False;
         #definition des tableaux de la structure
         self.tests=[]
         self.test_courant={}
@@ -119,10 +119,10 @@ class Parser(ContentHandler):
             self.isReference = True
             
         elif name == 'width':
-        	self.isWidth = True;
+        	self.isWidth = True
         	
        	elif name == 'height':
-       		self.isHeight = True;
+       		self.isHeight = True
        	
         
 
@@ -169,6 +169,10 @@ class Parser(ContentHandler):
             elif self.isParameters == True:
                 if self.isParameter == True:
                         self.parameters['param'].append(chars)
+                elif self.isWidth == True:
+                        self.parameters['width']=chars
+                elif self.isHeight == True:
+                        self.parameters['height']=chars
 
         elif self.isPostprocessing == True:
             if self.isPostprocess == True:
@@ -177,11 +181,7 @@ class Parser(ContentHandler):
                 elif self.isParameters == True:
                     if self.isParameter == True:
                         self.parameters['param'].append(chars)
-                    elif self.isWidth == True:
-                    	self.parameters['width'].append(chars);
-                    elif self.isHeight == True:
-                    	self.parameters['height'].append(chars);
-
+                        
         elif self.isDiagnostic == True:
             if self.isName == True:
                 self.diagnostic["name"]=chars
