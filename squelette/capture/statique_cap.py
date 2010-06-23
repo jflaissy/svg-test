@@ -41,11 +41,24 @@ def screenshot_pil(filename):
     return output_file
 
 def setup_file(filename):
-    """Met en place le fichier SVG qui sera chargé par le navigateur."""
-    file_path = os.path.join(os.getcwd(), 'capture',
-                             'statique-cap-files', 'file.svg')
-
-    shutil.copyfile(filename, file_path)
+    """Met en place la page HTML (faisant référence au SVG) qui sera
+    chargé par le navigateur."""
+    cap_dir = os.path.join(os.getcwd(), 'capture',
+                             'statique-cap-files')
+    file_path = os.path.join('..', '..', filename)
+    page_path = os.path.join(cap_dir, 'page.html')
+    dest = open(page_path, 'w')
+    header = os.path.join(cap_dir, 'page-header')
+    footer = os.path.join(cap_dir, 'page-footer')
+    headfile = open(header, 'r')
+    footfile = open(footer, 'r')
+    dest.write(headfile.read())
+    # Ecriture des parametres dynamiques : nom de fichier, taille (TODO(m): à faire)
+    dest.write('src=\"' + file_path + "\"")
+    dest.write(footfile.read())
+    dest.close()
+    headfile.close()
+    footfile.close()
 
 def go(input_file, output_prefix, parameters):
     print 'Capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix

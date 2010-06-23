@@ -12,7 +12,7 @@
     <preprocessing>
     </preprocessing>
     <capture>
-      <name>statique-cap</name>
+      <name>statique_cap</name>
     </capture>
    <postprocessing>
      <postprocess>
