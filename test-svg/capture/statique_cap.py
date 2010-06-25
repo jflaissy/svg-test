@@ -54,7 +54,7 @@ def setup_file(filename, parameters):
     dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
                + "\" width=\"" + parameters['width'] + "\"")
     dest.write(footfile.read())
-    dest.clos()
+    dest.close()
     headfile.close()
     footfile.close()
 
