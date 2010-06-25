@@ -25,6 +25,7 @@ def screenshot_mac(filename):
     format = 'bmp'
     output_file = filename + '.' + format
     p = subprocess.Popen(['screencapture', '-t', format, output_file])
+    time.sleep(5)
     return output_file
 
 def screenshot_pil(filename):
@@ -53,7 +54,7 @@ def setup_file(filename, parameters):
     dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
                + "\" width=\"" + parameters['width'] + "\"")
     dest.write(footfile.read())
-    dest.close()
+    dest.clos()
     headfile.close()
     footfile.close()
 
