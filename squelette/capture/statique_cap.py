@@ -11,7 +11,6 @@ import platform
 def screenshot_qt4(filename):
     """Effectue une copie d'écran, stocke le résultat dans `filename'
     (auquel on ajoute l'extension)."""
-    print 'cap linux'
     from PyQt4.QtGui import QPixmap, QApplication
     app = QApplication(sys.argv)
     format = 'bmp'
@@ -22,7 +21,6 @@ def screenshot_qt4(filename):
 def screenshot_mac(filename):
     """Effectue une copie d'écran, stocke le résultat dans `filename'
     (auquel on ajoute l'extension)."""
-    print 'cap mac'
     import subprocess
     format = 'bmp'
     output_file = filename + '.' + format
@@ -31,7 +29,6 @@ def screenshot_mac(filename):
 
 def screenshot_pil(filename):
     """Effectue une copie d'écran sous Windows, avec la librairie PIL."""
-    print 'cap win'
     import ImageGrab
     format = 'bmp'
     output_file = filename + '.' + format
@@ -52,10 +49,6 @@ def setup_file(filename, parameters):
     headfile = open(header, 'r')
     footfile = open(footer, 'r')
     dest.write(headfile.read())
-    # (TODO(m): à supprimer quand c'est bon)
-    #parameters['height'] = "400"
-    #parameters['width'] = "400"
-    print parameters
     # Ecriture des parametres dynamiques : nom de fichier, taille
     dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
                + "\" width=\"" + parameters['width'] + "\"")

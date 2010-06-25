@@ -53,8 +53,6 @@ class Parser(ContentHandler):
         Cette methode est appele a chaque fois qu'une balise est ouverte <balise> a chaque fois on va mettre le boolean associe a true et creer les structures dont on a besoin
         """
         
-        print "start", name
-
         if name == 'tests':
             self.parsed = True
             self.isTests = True #On met un boolean afin de voir si on est dans la balise Tests
@@ -171,13 +169,8 @@ class Parser(ContentHandler):
                         self.parameters['param'].append(chars)
                 elif self.isWidth == True:
                         self.parameters['width']=chars
-                        print 'UUUU'
-                        print chars
                 elif self.isHeight == True:
                         self.parameters['height']=chars
-                        print 'VVVV'
-                        print chars
-
 
         elif self.isPostprocessing == True:
             if self.isPostprocess == True:
@@ -200,7 +193,6 @@ class Parser(ContentHandler):
         """ 
         Cette fonction est appelee au moment de la fermeture de la balise </balise> elle sert a ajouter les sous structures dans la grande structure et a mettre les booleans a false pour le parcours de la structure de l'arbre
         """
-        print "end", name
         if name == 'tests':
             self.isTests = False  
             
@@ -261,7 +253,6 @@ class Parser(ContentHandler):
             self.isPostprocess = False
             self.postprocess_courant["parameters"] = self.parameters
             self.postprocessing.append(self.postprocess_courant)
-            print 'post cournat ', self.postprocessing
 
         elif name == 'diagnostic':
             self.isDiagnostic = False
