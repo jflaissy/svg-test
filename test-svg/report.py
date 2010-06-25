@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-"""Génération du rapport XML."""
 
+# -*- coding: utf-8 -*-
 
 import sys
 reload(sys)
@@ -9,16 +8,21 @@ sys.setdefaultencoding("utf_8")
 
 
 def buildKeyValue(doc, key, value):
-    keyElt = doc.createElement(key)
-    keyElt.appendChild(doc.createTextNode(value))
-    return keyElt
+	keyElt = doc.createElement(key)
+	keyElt.appendChild(doc.createTextNode(value))
+	return keyElt
 
 def buildParameters(doc, parametersList):
-    parametersElt = doc.createElement("parameters")
-    if parametersList!=None :
-        for key, value in parametersList.items():
-            parametersElt.appendChild(buildKeyValue(doc, key, value))      
-    return parametersElt
+	parametersElt = doc.createElement("parameters")
+	print parametersList
+	if parametersList!=None :
+		for key, value in parametersList.items():
+			if key == 'param':
+				for val in value:
+					parametersElt.appendChild(buildKeyValue(doc, "parameter", val))
+			else :
+				parametersElt.appendChild(buildKeyValue(doc, key, value))
+	return parametersElt
 
 def serializeCapture(doc, capture):
     captureElt = doc.createElement("capture")
