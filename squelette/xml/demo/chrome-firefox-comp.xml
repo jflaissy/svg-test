@@ -5,7 +5,7 @@
     <source>svg/wp.svg</source>
     <type>compare</type>
     <browsers>
-      <browser>google-chrome</browser>
+      <browser>chrome</browser>
       <browser>firefox</browser>
     </browsers>
     <preprocessing>

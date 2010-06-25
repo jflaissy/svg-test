@@ -6,7 +6,7 @@
     <type>separate</type>
     <browsers>
 
-      <browser>google-chrome</browser>
+      <browser>chrome</browser>
       <browser>firefox</browser>
     </browsers>
     <preprocessing>
