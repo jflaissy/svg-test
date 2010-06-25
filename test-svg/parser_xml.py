@@ -1,3 +1,5 @@
+"""Lecture du fichier XML de configuration."""
+
 from xml.sax.handler import ContentHandler
 #from xml.sax import parse
 import sys

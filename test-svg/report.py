@@ -1,5 +1,6 @@
-
 # -*- coding: utf-8 -*-
+"""Génération du rapport XML."""
+
 
 import sys
 reload(sys)
