@@ -7,7 +7,6 @@ import sys
 import os
 import shutil
 import platform
-from PyQt4.QtGui import QPixmap, QApplication
 
 def screenshot_qt4(filename):
     """Effectue une copie d'écran, stocke le résultat dans `filename'
