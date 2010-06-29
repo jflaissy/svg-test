@@ -79,7 +79,7 @@ def go(input_file, output_prefix, parameters):
     global need_sleep
     print 'capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
 
-    plat_linux, plat_mac, plat_mac = set_platform()
+    plat_linux, plat_win, plat_mac = set_platform()
 
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
