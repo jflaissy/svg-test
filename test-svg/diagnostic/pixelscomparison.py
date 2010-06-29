@@ -4,8 +4,7 @@
 import Image
 
 def go(comparison, output_prefix, diagnostic):
-    """Module de comparaison pixel a pixel.
-    Il compare une capture avec une image de reference s'il y en a une(mode "separate")
+    """Il compare une capture avec une image de reference s'il y en a une(mode "separate")
     ou avec une autre capture(mode "les uns contres les autres")"""
     print 'Diagnostic Pixel à Pixel. '
     input_file1=comparison['instances'][0]['postprocessing']['output']

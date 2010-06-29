@@ -77,7 +77,7 @@ def launchPreprocessing(tests):
             input_file = source_filename
             preprocessing['filters'].insert(0, {'name' : 'identity',
                                                 'filter_id' : 0,
-                                                'parameters' : None })
+                                                'parameters' : { 'param' : [] }})
             # Pour chaque filtre, on regle les fichiers
             # d'entrée/sortie, on charge le module python et on lance.
             for prefilter in preprocessing['filters']:
@@ -193,8 +193,8 @@ def launchDiagnostic(tests):
 def launchReport(tests):
     """Lance le générateur de rapport."""
     print '* Lancement du rapport.'
-    output_file = os.path.join(conf['report_directory'], 'report.xml')
-    report.go(tests, output_file)
+    output_prefix = os.path.join(conf['report_directory'])
+    report.go(tests, output_prefix)
 
 def init():
     """Initialise la configuration du programme. En particulier, on
