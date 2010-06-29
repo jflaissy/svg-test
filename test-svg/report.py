@@ -1,12 +1,11 @@
-
 # -*- coding: utf-8 -*-
 """Module de generation de rapport xml."""
+# bidouille pour ne pas avoir de probleme d'encoding
 import sys
 reload(sys)
 sys.setdefaultencoding("utf_8")
 import os
 import shutil
-
 
 
 def buildKeyValue(doc, key, value):
@@ -30,7 +29,7 @@ def buildParameters(doc, parametersList):
                     parametersElt.appendChild(buildKeyValue(doc, "parameter", val))
             else :
                 parametersElt.appendChild(buildKeyValue(doc, key, value))
-                return parametersElt
+    return parametersElt
 
 def serializeCapture(doc, capture):
     """genere les balises de capture de l arbre xml et leurs contenus."""
@@ -69,12 +68,12 @@ def serializePreprocessing(doc, preprocessing):
     preprocessingElt.appendChild(buildKeyValue(doc, "output", preprocessing["output"]))
     #pour chaque filtre
     for filter in preprocessing["filters"]:
-        #creation d'un noeud preprocess
-        preprocessElt = doc.createElement("preprocess")
-        preprocessElt.appendChild(buildKeyValue(doc, "name", filter["name"]))
-        preprocessElt.appendChild(buildParameters(doc, filter["parameters"]))
-        preprocessElt.appendChild(buildKeyValue(doc, "filter_id", "%s" % filter["filter_id"]))
-        preprocessingElt.appendChild(preprocessElt)
+		#creation d'un noeud preprocess
+		preprocessElt = doc.createElement("preprocess")
+		preprocessElt.appendChild(buildKeyValue(doc, "name", filter["name"]))
+		preprocessElt.appendChild(buildParameters(doc, filter["parameters"]))
+		preprocessElt.appendChild(buildKeyValue(doc, "filter_id", "%s" % filter["filter_id"]))
+		preprocessingElt.appendChild(preprocessElt)
     return preprocessingElt
 
 def serializePostprocessing(doc, postprocessing):
@@ -104,7 +103,7 @@ def serializeComparison(doc, comparison):
         instanceElt.appendChild(buildKeyValue(doc,"instance_id",instance["instance_id"]))
         #construction du noeud preprocessing
         instanceElt.appendChild(serializePreprocessing(doc, instance["preprocessing"]))
-        #construction du noeud capture
+		#construction du noeud capture
         instanceElt.appendChild(serializeCapture(doc, instance["capture"]))
         #construction du noeud postprocessing
         instanceElt.appendChild(serializePostprocessing(doc, instance["postprocessing"]))
@@ -118,7 +117,7 @@ def serializeComparison(doc, comparison):
     
     return comparisonsElt
 
-def go(tests, output_file) :
+def go(tests, output_prefix) :
     """genere les balises de tests de l arbre xml et leurs contenus."""
     from xml.dom.minidom import Document
     doc = Document()#creation du document
@@ -138,7 +137,8 @@ def go(tests, output_file) :
         for comparison in test["comparisons"]: 
             comparisons.appendChild(serializeComparison(doc, comparison))
         testElt.appendChild(comparisons)
-        
+    output_file = os.path.join(output_prefix, 'report.xml')
+    output_file_xsl = os.path.join(output_prefix, 'report.xsl')
     #on genere le fichier xml
     logfile = open(output_file, 'w')
     logfile.write(doc.toprettyxml(indent="  ", encoding="UTF-8"))
@@ -148,4 +148,5 @@ def go(tests, output_file) :
     # copie de la feuille xsl
     shutil.copyfile('xslt/report.xsl', output_file_xsl)
 
+                        
 
