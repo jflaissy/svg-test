@@ -11,20 +11,16 @@ import parser_xml
 import report
 from xml.sax import parse
 
-#from structure import Structure
-
-
 conf = { }
 
 def go(config_file):
     """Pilote toute la chaine de tests."""
     init()
     parser_Config=parser_xml.Parser()
-    #On parse
+    # On parse
     parse(config_file, parser_Config)
-    #On verifie que la methode nous renvoi bien la structure apres parsage
+    # On verifie que la methode nous renvoi bien la structure apres parsage
     tests = parser_Config.getStructure()
-    #print tests
 
     # Idée: on passe a travers un module de preT, capture, un mod. de postT,
     # un mod. de diag, puis on genere le rapport
@@ -34,9 +30,8 @@ def go(config_file):
     launchPostprocessing(tests)
     launchDiagnostic(tests)
 
-    #rapport.go(tests)
     launchReport(tests)
-    #print tests
+    # print tests
 
 def initalizeTests(tests):
     """Initalise la structure de tests pour faciliter l'utilisation
@@ -45,7 +40,6 @@ def initalizeTests(tests):
     test_nb = 1
     for test in tests:
         test['test_id'] = util.make_test_id(test['source'], test_nb)
-        #print test['test_id']
         instance_nb = 1
         for instance in test['execs']:
             instance['instance_id'] = "%d_%s" % (instance_nb, instance['browser'])
@@ -85,7 +79,8 @@ def launchPreprocessing(tests):
                                                        instance['instance_id'],
                                                        prefilter['filter_id'],
                                                        prefilter['name'])
-                output_file = os.path.join(conf['preprocessing_directory'], output_filename)
+                output_file = os.path.join(conf['preprocessing_directory'],
+                                           output_filename)
 
                 module = util.importer_module('pretraitement',
                                               prefilter['name'])
@@ -108,7 +103,8 @@ def launchCapture(tests):
                                             instance['instance_id'],
                                             capture['name'])
             input_file = instance['preprocessing']['output']
-            output_prefix = os.path.join(conf['capture_directory'], output_filename)
+            output_prefix = os.path.join(conf['capture_directory'],
+                                         output_filename)
             output_file = module.go(input_file, output_prefix,
                                     capture['parameters'])
             capture['output'] = output_file
@@ -184,10 +180,7 @@ def launchDiagnostic(tests):
             module_nom = diagnostic['name']
             module = util.importer_module('diagnostic', module_nom)
             source_filename = test['source']
-#            source_basename = util.trim_extension(source_filename, 'svg')
-
             output_prefix = os.path.join(conf['capture_directory'], comparison['comparison_id'] )
-            #module.go(comparison, output_prefix, diagnostic['parameters'])
             module.go(comparison, output_prefix, diagnostic)
 
 def launchReport(tests):

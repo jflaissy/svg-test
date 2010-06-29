@@ -1,4 +1,3 @@
-###
 # -*- coding: utf-8 -*-
 """Prétraitement qui enleve le texte du fichier svg."""
 

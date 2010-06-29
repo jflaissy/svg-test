@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Posttraitement 'identité': ne modifie rien."""
 
 import shutil

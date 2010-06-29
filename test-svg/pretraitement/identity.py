@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Prétraitement 'identité': ne modifie rien. Télécharge le fichier
-si il y a besoin."""
+sur le web si il y a besoin."""
 
 import shutil
 
