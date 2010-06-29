@@ -62,9 +62,25 @@ def setup_file(filename, parameters):
     headfile.close()
     footfile.close()
 
+def set_platform():
+    """Trouve la plateforme sous laquelle tourne le programme
+    (Linux/Windows/Mac)."""
+    syst = platform.system()
+    plat_linux, plat_win, plat_mac= False, False, False
+    if syst == 'Linux':
+        plat_linux = True
+    elif syst == 'Windows':
+        plat_win = True
+    elif syst == 'Darwin':
+        plat_mac = True
+    return (plat_linux, plat_mac, plat_mac)
+
 def go(input_file, output_prefix, parameters):
     global need_sleep
     print 'capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
+
+    plat_linux, plat_mac, plat_mac = set_platform()
+
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
     setup_file(input_file, parameters)
@@ -75,18 +91,19 @@ def go(input_file, output_prefix, parameters):
     # on accroche un gestionnaire du signal 17 pour gérer le conflit
     # entre le sleep et le processus fils qui fait remonter des signaux.
     need_sleep = True
-    signal.signal(17, sighandler)
+    if plat_linux:
+        signal.signal(17, sighandler)
     time.sleep(10)
     p = launcher.finish()
     need_sleep = False
     # screenshot different selon la plateforme
-    syst = platform.system()
-    if syst == 'Linux':
+    if plat_linux:
         output_file = screenshot_qt4(output_prefix)
-    elif syst == 'Windows':
+    elif plat_win:
         output_file = screenshot_pil(output_prefix)
-    elif syst == 'Darwin':
+    elif plat_mac:
         output_file = screenshot_mac(output_prefix)
+
     p.kill()
     return output_file
 
