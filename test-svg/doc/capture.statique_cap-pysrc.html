@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>capture.statique_cap</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >svg-test</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="capture-module.html">Package&nbsp;capture</a> ::
+        Module&nbsp;statique_cap
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="capture.statique_cap-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="capture.statique_cap-module.html">Module capture.statique_cap</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""Module de capture par copie d'&#233;cran."""</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">shutil</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">platform</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">signal</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable capture.statique_cap.need_sleep=capture.statique_cap-module.html#need_sleep"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-0', 'need_sleep', 'link-0');">need_sleep</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> <tt class="py-comment"># pour la gestion des sleep()</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="screenshot_qt4"></a><div id="screenshot_qt4-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="screenshot_qt4-toggle" onclick="return toggle('screenshot_qt4');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#screenshot_qt4">screenshot_qt4</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="screenshot_qt4-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="screenshot_qt4-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-docstring">"""Effectue une copie d'&#233;cran, stocke le r&#233;sultat dans `filename'</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    (auquel on ajoute l'extension)."""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">PyQt4</tt><tt class="py-op">.</tt><tt class="py-name">QtGui</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QPixmap</tt><tt class="py-op">,</tt> <tt class="py-name">QApplication</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">app</tt> <tt class="py-op">=</tt> <tt class="py-name">QApplication</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">format</tt> <tt class="py-op">=</tt> <tt class="py-string">'bmp'</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> <tt class="py-op">+</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">format</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-name">QPixmap</tt><tt class="py-op">.</tt><tt class="py-name">grabWindow</tt><tt class="py-op">(</tt><tt class="py-name">QApplication</tt><tt class="py-op">.</tt><tt class="py-name">desktop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">winId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">save</tt><tt class="py-op">(</tt><tt class="py-name">output_file</tt><tt class="py-op">,</tt> <tt class="py-name">format</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">output_file</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="screenshot_mac"></a><div id="screenshot_mac-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="screenshot_mac-toggle" onclick="return toggle('screenshot_mac');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#screenshot_mac">screenshot_mac</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="screenshot_mac-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="screenshot_mac-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-docstring">"""Effectue une copie d'&#233;cran, stocke le r&#233;sultat dans `filename'</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    (auquel on ajoute l'extension)."""</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">format</tt> <tt class="py-op">=</tt> <tt class="py-string">'bmp'</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> <tt class="py-op">+</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">format</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'screencapture'</tt><tt class="py-op">,</tt> <tt class="py-string">'-t'</tt><tt class="py-op">,</tt> <tt class="py-name">format</tt><tt class="py-op">,</tt> <tt class="py-name">output_file</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">5</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">output_file</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="screenshot_pil"></a><div id="screenshot_pil-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="screenshot_pil-toggle" onclick="return toggle('screenshot_pil');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#screenshot_pil">screenshot_pil</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="screenshot_pil-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="screenshot_pil-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-docstring">"""Effectue une copie d'&#233;cran sous Windows, avec la librairie PIL."""</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">ImageGrab</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-name">format</tt> <tt class="py-op">=</tt> <tt class="py-string">'bmp'</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> <tt class="py-op">+</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">format</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-name">img</tt> <tt class="py-op">=</tt> <tt class="py-name">ImageGrab</tt><tt class="py-op">.</tt><tt class="py-name">grab</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">img</tt><tt class="py-op">.</tt><tt class="py-name">save</tt><tt class="py-op">(</tt><tt class="py-name">output_file</tt><tt class="py-op">,</tt> <tt class="py-name">format</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">output_file</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="setup_file"></a><div id="setup_file-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="setup_file-toggle" onclick="return toggle('setup_file');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#setup_file">setup_file</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">parameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="setup_file-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="setup_file-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-docstring">"""Met en place la page HTML (faisant r&#233;f&#233;rence au SVG) qui sera</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    charg&#233; par le navigateur."""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-name">cap_dir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">'capture'</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                             <tt class="py-string">'statique-cap-files'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">file_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">'..'</tt><tt class="py-op">,</tt> <tt class="py-string">'..'</tt><tt class="py-op">,</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">page_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">cap_dir</tt><tt class="py-op">,</tt> <tt class="py-string">'page.html'</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-name">dest</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">page_path</tt><tt class="py-op">,</tt> <tt class="py-string">'w'</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-name">header</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">cap_dir</tt><tt class="py-op">,</tt> <tt class="py-string">'page-header'</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">footer</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">cap_dir</tt><tt class="py-op">,</tt> <tt class="py-string">'page-footer'</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-name">headfile</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">header</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-name">footfile</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">footer</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">headfile</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-comment"># Ecriture des parametres dynamiques : nom de fichier, taille.</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'src=\"'</tt> <tt class="py-op">+</tt> <tt class="py-name">file_path</tt> <tt class="py-op">+</tt> <tt class="py-string">"\" height=\""</tt> <tt class="py-op">+</tt> <tt class="py-name">parameters</tt><tt class="py-op">[</tt><tt class="py-string">'height'</tt><tt class="py-op">]</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">               <tt class="py-op">+</tt> <tt class="py-string">"\" width=\""</tt> <tt class="py-op">+</tt> <tt class="py-name">parameters</tt><tt class="py-op">[</tt><tt class="py-string">'width'</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">"\""</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">footfile</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-name">headfile</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">footfile</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="go"></a><div id="go-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="go-toggle" onclick="return toggle('go');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#go">go</a><tt class="py-op">(</tt><tt class="py-param">input_file</tt><tt class="py-op">,</tt> <tt class="py-param">output_prefix</tt><tt class="py-op">,</tt> <tt class="py-param">parameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="go-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="go-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-1" class="py-name"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-1', 'need_sleep', 'link-0');">need_sleep</a></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">'capture statique '</tt> <tt class="py-op">,</tt> <tt class="py-name">parameters</tt><tt class="py-op">[</tt><tt class="py-string">'browser'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'in:'</tt><tt class="py-op">,</tt> <tt class="py-name">input_file</tt><tt class="py-op">,</tt> <tt class="py-string">'out:'</tt><tt class="py-op">,</tt> <tt class="py-name">output_prefix</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-name">page_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">'capture'</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                             <tt class="py-string">'statique-cap-files'</tt><tt class="py-op">,</tt> <tt class="py-string">'page.html'</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Function capture.statique_cap.setup_file()=capture.statique_cap-module.html#setup_file"><a title="capture.statique_cap.setup_file" class="py-name" href="#" onclick="return doclink('link-2', 'setup_file', 'link-2');">setup_file</a></tt><tt class="py-op">(</tt><tt class="py-name">input_file</tt><tt class="py-op">,</tt> <tt class="py-name">parameters</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-comment"># le lanceur de navigateur (cf. classe ci dessous)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">launcher</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name" targets="Class capture.statique_cap.BrowserLauncher=capture.statique_cap.BrowserLauncher-class.html"><a title="capture.statique_cap.BrowserLauncher" class="py-name" href="#" onclick="return doclink('link-3', 'BrowserLauncher', 'link-3');">BrowserLauncher</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">parameters</tt><tt class="py-op">[</tt><tt class="py-string">'browser'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">page_path</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">launcher</tt><tt class="py-op">.</tt><tt class="py-name">start</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">'Sleep 10s...'</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-comment"># on accroche un gestionnaire du signal 17 pour g&#233;rer le conflit</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment"># entre le sleep et le processus fils qui fait remonter des signaux.</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt id="link-4" class="py-name"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-4', 'need_sleep', 'link-0');">need_sleep</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">(</tt><tt class="py-number">17</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Function capture.statique_cap.sighandler()=capture.statique_cap-module.html#sighandler"><a title="capture.statique_cap.sighandler" class="py-name" href="#" onclick="return doclink('link-5', 'sighandler', 'link-5');">sighandler</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">launcher</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method capture.statique_cap.BrowserLauncher.finish()=capture.statique_cap.BrowserLauncher-class.html#finish"><a title="capture.statique_cap.BrowserLauncher.finish" class="py-name" href="#" onclick="return doclink('link-6', 'finish', 'link-6');">finish</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-7', 'need_sleep', 'link-0');">need_sleep</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-comment"># screenshot different selon la plateforme</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">syst</tt> <tt class="py-op">=</tt> <tt class="py-name">platform</tt><tt class="py-op">.</tt><tt class="py-name">system</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">syst</tt> <tt class="py-op">==</tt> <tt class="py-string">'Linux'</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Function capture.statique_cap.screenshot_qt4()=capture.statique_cap-module.html#screenshot_qt4"><a title="capture.statique_cap.screenshot_qt4" class="py-name" href="#" onclick="return doclink('link-8', 'screenshot_qt4', 'link-8');">screenshot_qt4</a></tt><tt class="py-op">(</tt><tt class="py-name">output_prefix</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">syst</tt> <tt class="py-op">==</tt> <tt class="py-string">'Windows'</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Function capture.statique_cap.screenshot_pil()=capture.statique_cap-module.html#screenshot_pil"><a title="capture.statique_cap.screenshot_pil" class="py-name" href="#" onclick="return doclink('link-9', 'screenshot_pil', 'link-9');">screenshot_pil</a></tt><tt class="py-op">(</tt><tt class="py-name">output_prefix</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">syst</tt> <tt class="py-op">==</tt> <tt class="py-string">'Darwin'</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">output_file</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name" targets="Function capture.statique_cap.screenshot_mac()=capture.statique_cap-module.html#screenshot_mac"><a title="capture.statique_cap.screenshot_mac" class="py-name" href="#" onclick="return doclink('link-10', 'screenshot_mac', 'link-10');">screenshot_mac</a></tt><tt class="py-op">(</tt><tt class="py-name">output_prefix</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">kill</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">output_file</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="sighandler"></a><div id="sighandler-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="sighandler-toggle" onclick="return toggle('sighandler');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap-module.html#sighandler">sighandler</a><tt class="py-op">(</tt><tt class="py-param">signum</tt><tt class="py-op">,</tt> <tt class="py-param">stackframe</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="sighandler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="sighandler-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-docstring">"""Un gestionnaire de signaux qui g&#232;re les p&#233;riodes de sommeil,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">    p&#233;rturb&#233;es par le fork() et les signaux 17 qui remontent."""</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-11" class="py-name"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-11', 'need_sleep', 'link-0');">need_sleep</a></tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-12" class="py-name"><a title="capture.statique_cap.need_sleep" class="py-name" href="#" onclick="return doclink('link-12', 'need_sleep', 'link-0');">need_sleep</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="BrowserLauncher"></a><div id="BrowserLauncher-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="BrowserLauncher-toggle" onclick="return toggle('BrowserLauncher');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="capture.statique_cap.BrowserLauncher-class.html">BrowserLauncher</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BrowserLauncher-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BrowserLauncher-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-docstring">"""Lance un navigateur dans un nouveau thread, pour r&#233;soudre des probl&#232;mes de signaux.</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    `command_line' est la commande &#224; lancer, un tableau d'arguments."""</tt> </tt>
+<a name="BrowserLauncher.__init__"></a><div id="BrowserLauncher.__init__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="BrowserLauncher.__init__-toggle" onclick="return toggle('BrowserLauncher.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap.BrowserLauncher-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">command_line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BrowserLauncher.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BrowserLauncher.__init__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method capture.statique_cap.BrowserLauncher.__init__()=capture.statique_cap.BrowserLauncher-class.html#__init__,Method parser_xml.Parser.__init__()=parser_xml.Parser-class.html#__init__"><a title="capture.statique_cap.BrowserLauncher.__init__
+parser_xml.Parser.__init__" class="py-name" href="#" onclick="return doclink('link-13', '__init__', 'link-13');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">command_line</tt> <tt class="py-op">=</tt> <tt class="py-name">command_line</tt> </tt>
+</div><a name="BrowserLauncher.run"></a><div id="BrowserLauncher.run-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="BrowserLauncher.run-toggle" onclick="return toggle('BrowserLauncher.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap.BrowserLauncher-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BrowserLauncher.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BrowserLauncher.run-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">command_line</tt><tt class="py-op">)</tt> </tt>
+</div><a name="BrowserLauncher.finish"></a><div id="BrowserLauncher.finish-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="BrowserLauncher.finish-toggle" onclick="return toggle('BrowserLauncher.finish');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="capture.statique_cap.BrowserLauncher-class.html#finish">finish</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BrowserLauncher.finish-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BrowserLauncher.finish-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> </tt>
+</div></div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >svg-test</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jun 29 23:14:47 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
