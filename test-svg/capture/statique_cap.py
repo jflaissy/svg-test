@@ -7,6 +7,10 @@ import sys
 import os
 import shutil
 import platform
+import threading
+import signal
+
+need_sleep = False # pour la gestion des sleep()
 
 def screenshot_qt4(filename):
     """Effectue une copie d'écran, stocke le résultat dans `filename'
@@ -50,7 +54,7 @@ def setup_file(filename, parameters):
     headfile = open(header, 'r')
     footfile = open(footer, 'r')
     dest.write(headfile.read())
-    # Ecriture des parametres dynamiques : nom de fichier, taille
+    # Ecriture des parametres dynamiques : nom de fichier, taille.
     dest.write('src=\"' + file_path + "\" height=\"" + parameters['height']
                + "\" width=\"" + parameters['width'] + "\"")
     dest.write(footfile.read())
@@ -59,15 +63,23 @@ def setup_file(filename, parameters):
     footfile.close()
 
 def go(input_file, output_prefix, parameters):
-    print 'Capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
+    global need_sleep
+    print 'capture statique ' , parameters['browser'], 'in:', input_file, 'out:', output_prefix
     page_path = os.path.join(os.getcwd(), 'capture',
                              'statique-cap-files', 'page.html')
     setup_file(input_file, parameters)
-    p = subprocess.Popen([parameters['browser'], page_path])
-    print '\t\tSleep 10s...',
+    # le lanceur de navigateur (cf. classe ci dessous)
+    launcher = BrowserLauncher([parameters['browser'], page_path])
+    launcher.start()
+    print 'Sleep 10s...'
+    # on accroche un gestionnaire du signal 17 pour gérer le conflit
+    # entre le sleep et le processus fils qui fait remonter des signaux.
+    need_sleep = True
+    signal.signal(17, sighandler)
     time.sleep(10)
-    print 'ok.'
-
+    p = launcher.finish()
+    need_sleep = False
+    # screenshot different selon la plateforme
     syst = platform.system()
     if syst == 'Linux':
         output_file = screenshot_qt4(output_prefix)
@@ -75,6 +87,25 @@ def go(input_file, output_prefix, parameters):
         output_file = screenshot_pil(output_prefix)
     elif syst == 'Darwin':
         output_file = screenshot_mac(output_prefix)
-
     p.kill()
     return output_file
+
+def sighandler(signum, stackframe):
+    """Un gestionnaire de signaux qui gère les périodes de sommeil,
+    pérturbées par le fork() et les signaux 17 qui remontent."""
+    global need_sleep
+    if need_sleep:
+        time.sleep(10)
+
+class BrowserLauncher(threading.Thread):
+    """Lance un navigateur dans un nouveau thread, pour résoudre des problèmes de signaux.
+    `command_line' est la commande à lancer, un tableau d'arguments."""
+    def __init__(self, command_line):
+        threading.Thread.__init__(self)
+        self.p = None
+        self.command_line = command_line
+    def run(self):
+        self.p = subprocess.Popen(self.command_line)
+    def finish(self):
+        return self.p
+
