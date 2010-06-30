@@ -5,34 +5,34 @@
   
   <xsl:template match="/">
     <html>
-      <body style='background-color:#222;'>
-	<h1 style = 'color: #59652F; font-size: 35px; text-align: center;'>Raport SVG TEST</h1>
+      <body>
+	<h1 style = ' font-size: 35px; text-align: center;'>Raport SVG TEST</h1>
 	<xsl:for-each select="tests"><!--OPEN TESTS -->
 	  <xsl:for-each select="test"><!--OPEN TEST -->
 	    <xsl:for-each select="comparisons"><!-- OPEN COMPARAISONS-->
 	      <xsl:for-each select="comparison"><!-- OPEN COMPARAISON-->
-		<ol style='background-color:#59652F'><h3 style = 'color: #222; font-size: 21px; text-align: center;'>Liste des instances:</h3>
+		<ol><h3 style = 'color: #222; font-size: 21px; text-align: center;'>Liste des instances:</h3>
 		<xsl:for-each select="instances"><!-- OPEN INSTANCES-->
-		  <table style="background-color:#59652F;"><tr>
+		  <table><tr>
 		    <xsl:for-each select="instance"><!-- OPEN INSTANCE-->
 		      <td style='width=70%'>
 			<!--position:absolute;-->
-			<div style=" background-color:#59652F; border-style:solid; border-width:3px; width=40%;"  > 
+			<div style=" border-style:solid; border-width:3px; width=40%;"  > 
 			  
 			<li><xsl:for-each select="instance_id"><h2 style = "color: #222; text-align: center;">Instance: <xsl:value-of select="."/></h2> </xsl:for-each></li>
 			<ul>
 			  <li> </li>
 			  <xsl:for-each select="preprocessing"><!-- OPEN PREPROCESSING-->
-			    <table border="1" bgcolor='#A1B55D'>
+			    <table border="1">
 			      <tr>
-				<th  bgcolor="#ff1133"  colspan="2">Preprocessing</th>
+				<th    colspan="2">Preprocessing</th>
 			      </tr>
 			      <tr>
-			      <th   bgcolor="#9acd45" colspan="2">Preprocess</th>
+			      <th   colspan="2">Preprocess</th>
 			    </tr>
 			      <tr>
-				<th  bgcolor="#9acd32">name</th>
-				<th  bgcolor="#9acd32">parameters</th>
+				<th>name</th>
+				<th >parameters</th>
 			      </tr>
 			      <xsl:for-each select="preprocess"><!-- OPEN PREPROCESS-->
 				<tr>
@@ -43,7 +43,7 @@
 
 			      </xsl:for-each><!-- CLOSE PREPROCESS -->
 			      <tr>
-			      <th  bgcolor="#9acd32" colspan="2">Output</th>
+			      <th colspan="2">Output</th>
 			    </tr>
 			    <tr>
 			      <th  colspan="2"><xsl:value-of select="output"/></th>
@@ -53,7 +53,7 @@
 			  <li> </li>
 			  <table border="1" bgcolor='#A1B55D'>
 			    <tr>
-			      <th  bgcolor="#ff1133" colspan="2">Capture</th>
+			      <th  colspan="2">Capture</th>
 			    </tr>
 			    <tr>
 			    <th >Name</th>
@@ -70,16 +70,16 @@
 			    <li> </li>
 			    <table border="1" bgcolor='#A1B55D'>
 			      <tr>
-				<th  bgcolor="#ff1133"  colspan="2">Postprocessing</th>
+				<th colspan="2">Postprocessing</th>
 			      </tr>
 			      <xsl:for-each select="postprocess"><!-- OPEN POSTPROCESS-->
 				<tr>
-				<th  bgcolor="#9acd32"  colspan="2">Postprocess</th>
+				<th  colspan="2">Postprocess</th>
 			      </tr>
 			      				<tr>
-				<th  bgcolor="#9acd32" >name</th>
-				<th  bgcolor="#9acd32" >parameters</th>
-				<th  bgcolor="#9acd32" >filters-id</th>
+				<th>name</th>
+				<th>parameters</th>
+				<th >filters-id</th>
 			      </tr>
 				<tr>
 				  <td><xsl:value-of select="name"/></td>
@@ -97,10 +97,10 @@
 		</xsl:for-each> <!-- CLOSE INSTANCES-->
 		</ol>
 		<!--position:absolute;-->
-		<div style = " width:40%; height:25%;top:520px ;left:50px; background-color:#59652F; border-style:solid; border-width:3px; " >
-		  <h3 style = 'color: #222; font-size: 21px; text-align: center;'>result</h3>
-		  <table border="1" bgcolor='#A1B55D'>
-		    <tr bgcolor="#9acd32">
+		<div style = " width:40%; height:25%;top:520px ;left:50px; border-style:solid; border-width:3px; " >
+		  <h3 style = 'font-size: 21px; text-align: center;'>result</h3>
+		  <table border="1">
+		    <tr >
 		      <th>Valide?</th>
 		    <th>Message</th>
 		    </tr>
