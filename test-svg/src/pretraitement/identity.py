@@ -9,6 +9,6 @@ def go(input_file, output_file, parameters=None):
     # Le fichier est sur le web, on le télécharge.
     if input_file[0:7] == 'http://':
         import urllib
-        print urllib.urlretrieve(input_file, output_file)
+        urllib.urlretrieve(input_file, output_file)
     else: # C'est un fichier normal, on copie.
         shutil.copyfile(input_file, output_file)

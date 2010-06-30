@@ -19,7 +19,6 @@ def buildParameters(doc, parametersList):
     """genere les balises de parametres de l arbre xml et leurs contenus."""
     #creation d'un noeud parameters
     parametersElt = doc.createElement("parameters")
-    print parametersList
     if parametersList!=None :
         #pour chaque parametre
         for key, value in parametersList.items():
@@ -56,8 +55,6 @@ def serializeDiagnostic(doc, diagnostic):
     #s il y a une image de reference 
     if "reference" in diagnostic:
         diagnosticElt.appendChild(buildKeyValue(doc, "reference", diagnostic["reference"]))
-    print 'zouzouz'
-    print diagnostic
     diagnosticElt.appendChild(buildParameters(doc, diagnostic["parameters"]))
     return diagnosticElt
 
@@ -121,7 +118,7 @@ def go(tests, output_prefix) :
     """genere les balises de tests de l arbre xml et leurs contenus."""
     from xml.dom.minidom import Document
     doc = Document()#creation du document
-    doc.appendChild(doc.createProcessingInstruction("xml-stylesheet","type=\"text/xsl\" href=\"xslt/report.xsl\""))
+    doc.appendChild(doc.createProcessingInstruction("xml-stylesheet","type=\"text/xsl\" href=\"report.xsl\""))
     testsElt = doc.createElement("tests")#creation du noeud "tests"
     doc.appendChild(testsElt)
     #creation des noeuds "test" et de leurs contenus
@@ -147,6 +144,4 @@ def go(tests, output_prefix) :
     print 'Le fichier résultat est', output_file
     # copie de la feuille xsl
     shutil.copyfile('xslt/report.xsl', output_file_xsl)
-
-                        
 
