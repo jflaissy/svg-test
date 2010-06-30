@@ -118,7 +118,8 @@ def go(tests, output_prefix) :
     """genere les balises de tests de l arbre xml et leurs contenus."""
     from xml.dom.minidom import Document
     doc = Document()#creation du document
-    doc.appendChild(doc.createProcessingInstruction("xml-stylesheet","type=\"text/xsl\" href=\"report.xsl\""))
+    doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
+                                                    "type=\"text/xsl\" href=\"report.xsl\""))
     testsElt = doc.createElement("tests")#creation du noeud "tests"
     doc.appendChild(testsElt)
     #creation des noeuds "test" et de leurs contenus
